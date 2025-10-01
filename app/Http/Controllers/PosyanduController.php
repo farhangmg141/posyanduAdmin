@@ -28,7 +28,7 @@ class PosyanduController extends Controller
     }
 
     /**
-     * Show the form for creat
+     * Show the form for 
      */
     public function create()
     {
