@@ -1,10 +1,26 @@
 <?php
 
-use App\Http\Controllers\PosyanduController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+// Halaman login
+Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
 
-Route::get('/posyandu', [PosyanduController::class, 'index'])->name('posyandu.index');
+// Proses login
+Route::post('/login', [LoginController::class, 'processLogin'])->name('login.process');
+
+// Proses register
+Route::post('/register', [LoginController::class, 'processRegister'])->name('register.process');
+
+// Dashboard (setelah login)
+Route::get('/dashboard', function () {
+    return view('dashboard'); // Ganti 'index' dengan nama view dashboard kamu
+})->middleware('auth')->name('dashboard');
+
+// Logout
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+
+// Route::get('/posyandu', [PosyanduController::class, 'index'])->name('posyandu.index');
+// Route::get('/posyanduLogin', [PosyanduController::class, 'index'])->name('posyandu.index');
