@@ -108,9 +108,8 @@ class AuthController extends Controller
 }
 
 
-    /**
-     * Tampilkan halaman Lupa Password
-     */
+    
+     
     public function showLinkRequestForm()
     {
         return view('auth.passwords.email');
