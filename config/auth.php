@@ -35,12 +35,14 @@ return [
     |
     */
 
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+ 'guards' => [
+    // Pastikan 'web' ada dan provider-nya menunjuk ke provider yang valid.
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users', // <-- HARUS menunjuk ke 'providers' yang ada di bawah
     ],
+    // ...
+],
 
     /*
     |--------------------------------------------------------------------------
@@ -59,17 +61,15 @@ return [
     |
     */
 
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+  'providers' => [
+    // Pastikan 'users' ada dan menunjuk ke model User Anda.
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\User::class, // Ubah jika model User Anda berada di namespace lain
     ],
+    // ...
+],
+
 
     /*
     |--------------------------------------------------------------------------

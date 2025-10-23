@@ -1,26 +1,40 @@
 <?php
 
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DataPosyanduController;
+use App\Http\Controllers\AuthController;
 
-// Halaman login
-Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
 
-// Proses login
-Route::post('/login', [LoginController::class, 'processLogin'])->name('login.process');
 
-// Proses register
-Route::post('/register', [LoginController::class, 'processRegister'])->name('register.process');
+// Proses Login
+Route::get('/login', [AuthController::class, 'showLoginRegister'])->name('login.show')->middleware('guest');
+Route::post('/login', [AuthController::class, 'login'])->name('login.process');
+// Logout
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+// Proses Register
+Route::post('/register', [AuthController::class, 'register'])->name('register.process');
+Route::get('forgot-password', [AuthController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+Route::post('reset-password', [AuthController::class, 'updatePassword'])->name('password.update');
+
 
 // Dashboard (setelah login)
-Route::get('/dashboard', function () {
-    return view('dashboard'); // Ganti 'index' dengan nama view dashboard kamu
-})->middleware('auth')->name('dashboard');
+Route::get('/login', [AuthController::class, 'showLoginRegister'])->name('login.show')->middleware('guest');
+// Dashboard Admin
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-// Logout
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-
-
-// Route::get('/posyandu', [PosyanduController::class, 'index'])->name('posyandu.index');
-// Route::get('/posyanduLogin', [PosyanduController::class, 'index'])->name('posyandu.index');
+// Halaman Data Posyandu
+// Menampilkan semua data posyandu
+Route::get('/data/dataPosyandu', [DataPosyanduController::class, 'index'])->name('dataPosyandu.index');
+// Form tambah posyandu
+Route::get('/data/dataPosyandu/create', [DataPosyanduController::class, 'create'])->name('dataPosyandu.create');
+// Simpan data baru
+Route::post('/data/dataPosyandu', [DataPosyanduController::class, 'store'])->name('dataPosyandu.store');
+// Form edit posyandu
+Route::get('/data/dataPosyandu/{id}/edit', [DataPosyanduController::class, 'edit'])->name('dataPosyandu.edit');
+// Update data
+Route::put('/data/dataPosyandu/{id}', [DataPosyanduController::class, 'update'])->name('dataPosyandu.update');
+// Hapus data
+Route::delete('/data/dataPosyandu/{id}', [DataPosyanduController::class, 'destroy'])->name('dataPosyandu.destroy');
