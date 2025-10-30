@@ -2,20 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Posyandu; 
+use App\Models\Posyandu;
+use App\Models\KaderPosyandu;
+use App\Models\JadwalPosyandu;
+use App\Models\LayananPosyandu;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // Ambil semua data posyandu
-        $dataPosyandu = Posyandu::latest()->get();
+        // Ambil data ringkasan
+        $totalPosyandu   = Posyandu::count();
+        $totalKader      = KaderPosyandu::count();
+        $totalJadwal     = JadwalPosyandu::count();
+        $totalLayanan    = LayananPosyandu::count();
 
-        // Hitung jumlah posyandu
-        $totalPosyandu = $dataPosyandu->count();
+        // Ambil 5 data terbaru dari masing-masing tabel
+        $dataPosyandu    = Posyandu::latest()->take(5)->get();
+        $dataKader       = KaderPosyandu::with(['posyandu', 'warga'])->latest()->take(5)->get();
+        $dataJadwal      = JadwalPosyandu::with('posyandu')->latest()->take(5)->get();
+        $dataLayanan     = LayananPosyandu::with(['jadwal', 'warga'])->latest()->take(5)->get();
 
-        return view('admin.dashboard', compact('dataPosyandu', 'totalPosyandu'));
+        return view('admin.dashboard', compact(
+            'totalPosyandu',
+            'totalKader',
+            'totalJadwal',
+            'totalLayanan',
+            'dataPosyandu',
+            'dataKader',
+            'dataJadwal',
+            'dataLayanan'
+        ));
     }
 }

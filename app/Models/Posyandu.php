@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,8 +9,8 @@ class Posyandu extends Model
     use HasFactory;
 
     protected $table = 'posyandu';
-    protected $primaryKey = 'posyandu_id';
-
+    protected $primaryKey = 'id'; // ubah ke 'id'
+   
     protected $fillable = [
         'nama',
         'alamat',
@@ -20,4 +19,6 @@ class Posyandu extends Model
         'kontak',
         'media',
     ];
+
+   
 }

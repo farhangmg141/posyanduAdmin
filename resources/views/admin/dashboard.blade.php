@@ -2,314 +2,357 @@
 
 @section('title', 'Dashboard Admin')
 
-@section('content')
-<div class="container-fluid mt-4">
-    <h1 class="mb-4 fw-bold text-krem">Dashboard Admin</h1>
+@include('admin.layout.css')
 
-    {{-- Kartu ringkasan --}}
+@section('content')
+<div class="container-fluid mt-4 px-4">
+    <!-- Header Section dengan Animasi -->
+    <div class="mb-5 fade-in">
+        <h1 class="fw-bold mb-2 display-4" style="color: #1a4d4d; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">Dashboard Admin</h1>
+        <p class="fs-5" style="color: #4a6b5c;">Selamat datang di sistem manajemen Posyandu</p>
+    </div>
+
+    {{-- 📊 Ringkasan Data dengan Gradient Cards & Animasi --}}
     <div class="row g-4 mb-5">
-        <div class="col-md-4">
-            <div class="card-summary p-4 text-center">
-                <div class="icon-wrapper mb-3">
-                    <i class="bi bi-hospital-fill fs-1"></i>
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-lg h-100 position-relative overflow-hidden card-animate" style="background: linear-gradient(135deg, #1a4d4d 0%, #2d6363 100%);">
+                <div class="card-body text-white p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <p class="mb-1 text-white fw-semibold" style="font-size: 0.95rem; letter-spacing: 0.5px;">Total Posyandu</p>
+                            <h2 class="fw-bold mb-0 text-white display-4" style="text-shadow: 2px 2px 6px rgba(0,0,0,0.3);">{{ $totalPosyandu }}</h2>
+                        </div>
+                        <div class="bg-white bg-opacity-25 rounded-3 p-3 icon-pulse">
+                            <i class="bi bi-hospital-fill fs-2 text-white"></i>
+                        </div>
+                    </div>
+                    <div class="progress" style="height: 6px; background-color: rgba(255,255,255,0.3);">
+                        <div class="progress-bar bg-white progress-animate" style="width: 75%; box-shadow: 0 2px 8px rgba(255,255,255,0.4);"></div>
+                    </div>
+                    <small class="text-white fw-semibold mt-2 d-block" style="font-size: 0.85rem;">
+                        <i class="bi bi-graph-up-arrow me-1"></i>Aktif dan Terdaftar
+                    </small>
                 </div>
-                <h6 class="text-uppercase text-muted-custom mb-2 fw-semibold">Total Posyandu</h6>
-                <h2 class="fw-bold text-krem display-4 mb-2">{{ $totalPosyandu }}</h2>
-                <p class="small text-putih-lembut mb-0">Data posyandu yang telah terdaftar</p>
+                <div class="card-glow"></div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-lg h-100 position-relative overflow-hidden card-animate" style="background: linear-gradient(135deg, #4a6b5c 0%, #5d7f6f 100%); animation-delay: 0.1s;">
+                <div class="card-body text-white p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <p class="mb-1 text-white fw-semibold" style="font-size: 0.95rem; letter-spacing: 0.5px;">Total Kader</p>
+                            <h2 class="fw-bold mb-0 text-white display-4" style="text-shadow: 2px 2px 6px rgba(0,0,0,0.3);">{{ $totalKader }}</h2>
+                        </div>
+                        <div class="bg-white bg-opacity-25 rounded-3 p-3 icon-pulse">
+                            <i class="bi bi-people-fill fs-2 text-white"></i>
+                        </div>
+                    </div>
+                    <div class="progress" style="height: 6px; background-color: rgba(255,255,255,0.3);">
+                        <div class="progress-bar bg-white progress-animate" style="width: 85%; animation-delay: 0.1s; box-shadow: 0 2px 8px rgba(255,255,255,0.4);"></div>
+                    </div>
+                    <small class="text-white fw-semibold mt-2 d-block" style="font-size: 0.85rem;">
+                        <i class="bi bi-people me-1"></i>Kader Aktif Bertugas
+                    </small>
+                </div>
+                <div class="card-glow"></div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-lg h-100 position-relative overflow-hidden card-animate" style="background: linear-gradient(135deg, #7a9b85 0%, #8dad98 100%); animation-delay: 0.2s;">
+                <div class="card-body text-white p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <p class="mb-1 text-white fw-semibold" style="font-size: 0.95rem; letter-spacing: 0.5px;">Total Jadwal</p>
+                            <h2 class="fw-bold mb-0 text-white display-4" style="text-shadow: 2px 2px 6px rgba(0,0,0,0.3);">{{ $totalJadwal }}</h2>
+                        </div>
+                        <div class="bg-white bg-opacity-25 rounded-3 p-3 icon-pulse">
+                            <i class="bi bi-calendar-event-fill fs-2 text-white"></i>
+                        </div>
+                    </div>
+                    <div class="progress" style="height: 6px; background-color: rgba(255,255,255,0.3);">
+                        <div class="progress-bar bg-white progress-animate" style="width: 60%; animation-delay: 0.2s; box-shadow: 0 2px 8px rgba(255,255,255,0.4);"></div>
+                    </div>
+                    <small class="text-white fw-semibold mt-2 d-block" style="font-size: 0.85rem;">
+                        <i class="bi bi-calendar-check me-1"></i>Jadwal Terjadwal
+                    </small>
+                </div>
+                <div class="card-glow"></div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-lg h-100 position-relative overflow-hidden card-animate" style="background: linear-gradient(135deg, #d4b896 0%, #e0c9a9 100%); animation-delay: 0.3s;">
+                <div class="card-body text-white p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <p class="mb-1 text-white fw-semibold" style="font-size: 0.95rem; letter-spacing: 0.5px;">Total Layanan</p>
+                            <h2 class="fw-bold mb-0 text-white display-4" style="text-shadow: 2px 2px 6px rgba(0,0,0,0.3);">{{ $totalLayanan }}</h2>
+                        </div>
+                        <div class="bg-white bg-opacity-25 rounded-3 p-3 icon-pulse">
+                            <i class="bi bi-clipboard2-pulse-fill fs-2 text-white"></i>
+                        </div>
+                    </div>
+                    <div class="progress" style="height: 6px; background-color: rgba(255,255,255,0.3);">
+                        <div class="progress-bar bg-white progress-animate" style="width: 90%; animation-delay: 0.3s; box-shadow: 0 2px 8px rgba(255,255,255,0.4);"></div>
+                    </div>
+                    <small class="text-white fw-semibold mt-2 d-block" style="font-size: 0.85rem;">
+                        <i class="bi bi-heart-pulse me-1"></i>Layanan Tercatat
+                    </small>
+                </div>
+                <div class="card-glow"></div>
             </div>
         </div>
     </div>
 
-    {{-- Daftar Posyandu --}}
-    <div class="card shadow-custom">
-        <div class="card-header py-4">
-            <h5 class="mb-0 text-krem fw-semibold">
-                <i class="bi bi-list-ul me-2"></i> 
-                Daftar Posyandu Terdaftar
-            </h5>
+    {{-- 📊 Grafik Statistik --}}
+    <div class="row g-4 mb-5">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg card-animate" style="animation-delay: 0.4s; background: #ffffff;">
+                <div class="card-header border-0 py-4" style="background: linear-gradient(90deg, #1a4d4d 0%, #2d6363 100%);">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-white bg-opacity-25 rounded-3 p-2 me-3">
+                            <i class="bi bi-bar-chart-fill fs-4 text-white"></i>
+                        </div>
+                        <h5 class="mb-0 text-white fw-bold" style="font-size: 1.1rem; letter-spacing: 0.5px;">Statistik Layanan Bulanan</h5>
+                    </div>
+                </div>
+                <div class="card-body p-4" style="background: #ffffff;">
+                    <canvas id="layananChart" height="80"></canvas>
+                </div>
+            </div>
         </div>
 
-        <div class="card-body p-0">
-            @if($dataPosyandu->isEmpty())
-                <div class="alert-warning-custom text-center m-4">
-                    <i class="bi bi-info-circle-fill me-2 fs-5"></i>
-                    <span class="fw-medium">Belum ada data posyandu yang tersedia</span>
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-lg h-100 card-animate" style="animation-delay: 0.5s; background: #ffffff;">
+                <div class="card-header border-0 py-4" style="background: linear-gradient(90deg, #4a6b5c 0%, #5d7f6f 100%);">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-white bg-opacity-25 rounded-3 p-2 me-3">
+                            <i class="bi bi-pie-chart-fill fs-4 text-white"></i>
+                        </div>
+                        <h5 class="mb-0 text-white fw-bold" style="font-size: 1.1rem; letter-spacing: 0.5px;">Distribusi Data</h5>
+                    </div>
                 </div>
-            @else
-                <div class="table-wrapper">
-                    <table class="table table-custom align-middle mb-0">
-                        <thead>
-                            <tr>
-                                <th class="text-center" style="width: 80px;">NO</th>
-                                <th>NAMA POSYANDU</th>
-                                <th>ALAMAT</th>
-                                <th class="text-center" style="width: 120px;">RT/RW</th>
-                                <th style="width: 150px;">KONTAK</th>
-                                <th class="text-center" style="width: 120px;">FOTO</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($dataPosyandu as $item)
-                                <tr>
-                                    <td class="text-center fw-semibold">{{ $loop->iteration }}</td>
-                                    <td class="fw-medium">{{ $item->nama }}</td>
-                                    <td>{{ $item->alamat }}</td>
-                                    <td class="text-center">{{ $item->rt }}/{{ $item->rw }}</td>
-                                    <td>{{ $item->kontak }}</td>
-                                    <td class="text-center">
-                                        @if ($item->media)
-                                            <img src="{{ asset('storage/'.$item->media) }}" 
-                                                 alt="foto" 
-                                                 class="img-table">
-                                        @else
-                                            <span class="badge-custom">Tidak ada</span>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                <div class="card-body p-4" style="background: #ffffff;">
+                    <canvas id="distribusiChart" height="200"></canvas>
                 </div>
-            @endif
+            </div>
+        </div>
+    </div>
+
+    {{-- 📅 Jadwal Posyandu Terbaru --}}
+    <div class="card border-0 shadow-lg mb-4 card-animate" style="animation-delay: 0.6s; background: #ffffff; border-radius: 12px;">
+        <div class="card-header border-0 py-4" style="background: linear-gradient(90deg, #1a4d4d 0%, #2d6363 100%); border-radius: 12px 12px 0 0;">
+            <div class="d-flex align-items-center">
+                <div class="bg-white bg-opacity-25 rounded-3 p-2 me-3">
+                    <i class="bi bi-calendar-event fs-4 text-white"></i>
+                </div>
+                <h5 class="mb-0 text-white fw-bold" style="font-size: 1.1rem; letter-spacing: 0.5px;">📅 Jadwal Posyandu Terbaru</h5>
+            </div>
+        </div>
+        <div class="card-body p-0" style="background: #ffffff;">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr style="background: linear-gradient(90deg, #1a4d4d 0%, #2d6363 100%);">
+                            <th class="border-0 py-4 px-4 text-white fw-bold" style="font-size: 1rem; letter-spacing: 0.5px;">Tanggal</th>
+                            <th class="border-0 py-4 px-4 text-white fw-bold" style="font-size: 1rem; letter-spacing: 0.5px;">Posyandu</th>
+                            <th class="border-0 py-4 px-4 text-white fw-bold" style="font-size: 1rem; letter-spacing: 0.5px;">Tema</th>
+                            <th class="border-0 py-4 px-4 text-white fw-bold" style="font-size: 1rem; letter-spacing: 0.5px;">Keterangan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($dataJadwal as $jadwal)
+                        <tr class="table-row-hover">
+                            <td class="px-4 py-4">
+                                <span class="badge rounded-pill px-4 py-2 text-white fw-bold" style="background: linear-gradient(135deg, #7a9b85 0%, #8dad98 100%); font-size: 0.9rem; letter-spacing: 0.3px; box-shadow: 0 4px 8px rgba(122,155,133,0.3);">
+                                    <i class="bi bi-calendar3 me-2"></i>
+                                    {{ \Carbon\Carbon::parse($jadwal->tanggal)->format('d/m/Y') }}
+                                </span>
+                            </td>
+                            <td class="px-4 py-4">
+                                <strong style="color: #1a4d4d; font-size: 1rem; font-weight: 700;">
+                                    {{ $jadwal->posyandu->nama ?? '-' }}
+                                </strong>
+                            </td>
+                            <td class="px-4 py-4">
+                                <span style="color: #2d2d2d; font-weight: 600; font-size: 0.95rem;">{{ $jadwal->tema }}</span>
+                            </td>
+                            <td class="px-4 py-4">
+                                <span style="color: #5a5a5a; font-weight: 500; font-size: 0.9rem;">{{ $jadwal->keterangan ?? '-' }}</span>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="4" class="text-center py-5">
+                                <i class="bi bi-inbox fs-1 d-block mb-3" style="color: #7a9b85;"></i>
+                                <p class="mb-0 fw-semibold" style="color: #4a6b5c; font-size: 1rem;">Belum ada data jadwal</p>
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {{-- 👩‍⚕️ Kader Posyandu Terbaru --}}
+    <div class="card border-0 shadow-lg mb-4 card-animate" style="animation-delay: 0.7s; background: #ffffff; border-radius: 12px;">
+        <div class="card-header border-0 py-4" style="background: linear-gradient(90deg, #4a6b5c 0%, #5d7f6f 100%); border-radius: 12px 12px 0 0;">
+            <div class="d-flex align-items-center">
+                <div class="bg-white bg-opacity-25 rounded-3 p-2 me-3">
+                    <i class="bi bi-person-badge fs-4 text-white"></i>
+                </div>
+                <h5 class="mb-0 text-white fw-bold" style="font-size: 1.1rem; letter-spacing: 0.5px;">👩‍⚕️ Kader Posyandu Terbaru</h5>
+            </div>
+        </div>
+        <div class="card-body p-0" style="background: #ffffff;">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr style="background: linear-gradient(90deg, #4a6b5c 0%, #5d7f6f 100%);">
+                            <th class="border-0 py-4 px-4 text-white fw-bold" style="font-size: 1rem; letter-spacing: 0.5px;">Nama Warga</th>
+                            <th class="border-0 py-4 px-4 text-white fw-bold" style="font-size: 1rem; letter-spacing: 0.5px;">Posyandu</th>
+                            <th class="border-0 py-4 px-4 text-white fw-bold" style="font-size: 1rem; letter-spacing: 0.5px;">Peran</th>
+                            <th class="border-0 py-4 px-4 text-white fw-bold" style="font-size: 1rem; letter-spacing: 0.5px;">Mulai Tugas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($dataKader as $kader)
+                        <tr class="table-row-hover">
+                            <td class="px-4 py-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center me-3 avatar-bounce"
+                                        style="width: 45px; height: 45px; background: linear-gradient(135deg, #7a9b85 0%, #8dad98 100%); color: white; font-weight: bold; box-shadow: 0 4px 12px rgba(122,155,133,0.4); font-size: 1.1rem;">
+                                        {{ substr($kader->warga->nama ?? 'N', 0, 1) }}
+                                    </div>
+                                    <strong style="color: #1a4d4d; font-size: 1rem; font-weight: 700;">{{ $kader->warga->nama ?? '-' }}</strong>
+                                </div>
+                            </td>
+                            <td class="px-4 py-4">
+                                <span style="color: #2d2d2d; font-weight: 600; font-size: 0.95rem;">{{ $kader->posyandu->nama ?? '-' }}</span>
+                            </td>
+                            <td class="px-4 py-4">
+                                <span class="badge rounded-pill px-4 py-2 text-white fw-bold" style="background: linear-gradient(135deg, #d4b896 0%, #e0c9a9 100%); font-size: 0.9rem; letter-spacing: 0.3px; box-shadow: 0 4px 8px rgba(212,184,150,0.3);">
+                                    <i class="bi bi-award me-1"></i>{{ $kader->peran }}
+                                </span>
+                            </td>
+                            <td class="px-4 py-4">
+                                <span style="color: #5a5a5a; font-weight: 500; font-size: 0.9rem;">
+                                    <i class="bi bi-calendar-check me-1" style="color: #4a6b5c;"></i>{{ $kader->mulai_tugas }}
+                                </span>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="4" class="text-center py-5">
+                                <i class="bi bi-inbox fs-1 d-block mb-3" style="color: #7a9b85;"></i>
+                                <p class="mb-0 fw-semibold" style="color: #4a6b5c; font-size: 1rem;">Belum ada data kader</p>
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {{-- 🧾 Layanan Posyandu Terbaru --}}
+    <div class="card border-0 shadow-lg mb-5 card-animate" style="animation-delay: 0.8s; background: #ffffff; border-radius: 12px;">
+        <div class="card-header border-0 py-4" style="background: linear-gradient(90deg, #7a9b85 0%, #8dad98 100%); border-radius: 12px 12px 0 0;">
+            <div class="d-flex align-items-center">
+                <div class="bg-white bg-opacity-25 rounded-3 p-2 me-3">
+                    <i class="bi bi-clipboard2-pulse fs-4 text-white"></i>
+                </div>
+                <h5 class="mb-0 text-white fw-bold" style="font-size: 1.1rem; letter-spacing: 0.5px;">🧾 Layanan Posyandu Terbaru</h5>
+            </div>
+        </div>
+        <div class="card-body p-0" style="background: #ffffff;">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr style="background: linear-gradient(90deg, #7a9b85 0%, #8dad98 100%);">
+                            <th class="border-0 py-4 px-4 text-white fw-bold" style="font-size: 1rem; letter-spacing: 0.5px;">Nama Warga</th>
+                            <th class="border-0 py-4 px-4 text-white fw-bold" style="font-size: 1rem; letter-spacing: 0.5px;">Tanggal Jadwal</th>
+                            <th class="border-0 py-4 px-4 text-white fw-bold" style="font-size: 1rem; letter-spacing: 0.5px;">Berat (kg)</th>
+                            <th class="border-0 py-4 px-4 text-white fw-bold" style="font-size: 1rem; letter-spacing: 0.5px;">Tinggi (cm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($dataLayanan as $layanan)
+                        <tr class="table-row-hover">
+                            <td class="px-4 py-4">
+                                <strong style="color: #1a4d4d; font-size: 1rem; font-weight: 700;">{{ $layanan->warga->nama ?? '-' }}</strong>
+                            </td>
+                            <td class="px-4 py-4">
+                                @if(optional($layanan->jadwal)->tanggal)
+                                <span style="color: #2d2d2d; font-weight: 600; font-size: 0.95rem;">
+                                    <i class="bi bi-calendar-check me-1" style="color: #4a6b5c;"></i>
+                                    {{ optional($layanan->jadwal)->tanggal }}
+                                </span>
+                                @else
+                                <span style="color: #999999; font-weight: 500;">-</span>
+                                @endif
+                            </td>
+                            <td class="px-4 py-4">
+                                @if($layanan->berat)
+                                <span class="badge rounded-pill px-4 py-2 text-white fw-bold" style="background: linear-gradient(135deg, #4a6b5c 0%, #5d7f6f 100%); font-size: 0.9rem; letter-spacing: 0.3px; box-shadow: 0 4px 8px rgba(74,107,92,0.3);">
+                                    <i class="bi bi-activity me-1"></i>{{ $layanan->berat }} kg
+                                </span>
+                                @else
+                                <span style="color: #999999; font-weight: 500;">-</span>
+                                @endif
+                            </td>
+                            <td class="px-4 py-4">
+                                @if($layanan->tinggi)
+                                <span class="badge rounded-pill px-4 py-2 text-white fw-bold" style="background: linear-gradient(135deg, #d4b896 0%, #e0c9a9 100%); font-size: 0.9rem; letter-spacing: 0.3px; box-shadow: 0 4px 8px rgba(212,184,150,0.3);">
+                                    <i class="bi bi-arrows-vertical me-1"></i>{{ $layanan->tinggi }} cm
+                                </span>
+                                @else
+                                <span style="color: #999999; font-weight: 500;">-</span>
+                                @endif
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="4" class="text-center py-5">
+                                <i class="bi bi-inbox fs-1 d-block mb-3" style="color: #7a9b85;"></i>
+                                <p class="mb-0 fw-semibold" style="color: #4a6b5c; font-size: 1rem;">Belum ada data layanan</p>
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
+{{-- Chart.js Library --}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 
-{{-- === CSS STYLE === --}}
-<style>
-/* 🎨 Palet utama */
-:root {
-    --gelap: #1A3636;
-    --sekunder: #40534C;
-    --lembut: #677D6A;
-    --krem: #D6BD98;
-    --putih-lembut: #F4F3EF;
-}
+{{-- Kirim data ke JavaScript menggunakan data attributes --}}
+<script>
+    // Set data ke canvas elements
+    document.addEventListener('DOMContentLoaded', function() {
+        const layananCanvas = document.getElementById('layananChart');
+        if (layananCanvas) {
+            layananCanvas.setAttribute('data-total', '{{ $totalLayanan ?? 0 }}');
+        }
 
-/* 🌑 Umum */
-body {
-    background-color: var(--gelap);
-    color: var(--putih-lembut);
-    font-family: "Poppins", sans-serif;
-}
+        const distribusiCanvas = document.getElementById('distribusiChart');
+        if (distribusiCanvas) {
+            distribusiCanvas.setAttribute('data-posyandu', '{{ $totalPosyandu ?? 0 }}');
+            distribusiCanvas.setAttribute('data-kader', '{{ $totalKader ?? 0 }}');
+            distribusiCanvas.setAttribute('data-jadwal', '{{ $totalJadwal ?? 0 }}');
+            distribusiCanvas.setAttribute('data-layanan', '{{ $totalLayanan ?? 0 }}');
+        }
+    });
+</script>
 
-/* ✨ Heading */
-h1 {
-    color: var(--krem);
-    letter-spacing: 0.5px;
-}
+{{-- Load Chart Script --}}
+<script src="{{ asset('js/dashboard-chart.js') }}"></script>
 
-.text-krem {
-    color: var(--krem) !important;
-}
-
-.text-putih-lembut {
-    color: var(--putih-lembut) !important;
-}
-
-.text-muted-custom {
-    color: rgba(214, 189, 152, 0.7) !important;
-}
-
-/* ✨ Card Summary */
-.card-summary {
-    background: linear-gradient(135deg, #40534C 0%, #677D6A 100%);
-    border: 1px solid rgba(214, 189, 152, 0.2);
-    border-radius: 12px;
-    color: var(--krem);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.icon-wrapper {
-    color: var(--krem);
-    opacity: 0.9;
-}
-
-/* ✨ Card */
-.card {
-    background-color: #2d4540;
-    border: 1px solid rgba(214, 189, 152, 0.15);
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.shadow-custom {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-.card-header {
-    background: linear-gradient(135deg, #677D6A 0%, #5a6f5c 100%) !important;
-    border-bottom: 2px solid rgba(214, 189, 152, 0.3);
-}
-
-.card-header h5 {
-    color: var(--krem);
-    letter-spacing: 0.5px;
-}
-
-.card-header i {
-    color: var(--krem);
-}
-
-/* 🧾 Table Wrapper - hilangkan scrollbar */
-.table-wrapper {
-    overflow-x: auto;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-
-.table-wrapper::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari and Opera */
-}
-
-/* 🧾 Tabel */
-.table-custom {
-    width: 100%;
-    color: var(--putih-lembut);
-    border-collapse: collapse;
-}
-
-/* Header tabel */
-.table-custom thead th {
-    background: linear-gradient(135deg, #677D6A 0%, #5a6f5c 100%);
-    color: var(--krem);
-    font-weight: 600;
-    font-size: 0.75rem;
-    letter-spacing: 1px;
-    padding: 16px 12px;
-    border: none;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
-
-/* Isi tabel */
-.table-custom tbody tr {
-    background-color: #40534C;
-    border-bottom: 1px solid rgba(214, 189, 152, 0.1);
-}
-
-.table-custom tbody tr:nth-child(even) {
-    background-color: #3a4c47;
-}
-
-.table-custom tbody td {
-    padding: 16px 12px;
-    color: var(--putih-lembut);
-    border: none;
-    vertical-align: middle;
-}
-
-/* Hover efek - tetap kelihatan teksnya */
-.table-custom tbody tr:hover {
-    background-color: #4d6159 !important;
-}
-
-/* Saat baris diklik - tetap kelihatan teksnya */
-.table-custom tbody tr:active,
-.table-custom tbody tr:focus {
-    background-color: #5a6f65 !important;
-    outline: 1px solid rgba(214, 189, 152, 0.3);
-}
-
-.table-custom tbody tr:focus-visible {
-    box-shadow: none;
-}
-
-/* 🔗 Link di dalam tabel */
-.table-custom tbody tr a {
-    color: var(--krem);
-    text-decoration: none;
-}
-
-.table-custom tbody tr a:hover {
-    color: #ffffff;
-    text-decoration: underline;
-}
-
-/* 📷 Gambar tabel */
-.img-table {
-    width: 55px;
-    height: 55px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid var(--krem);
-}
-
-/* Badge */
-.badge-custom {
-    background-color: #5a6f5c;
-    color: var(--putih-lembut);
-    padding: 6px 14px;
-    border-radius: 6px;
-    font-size: 0.7rem;
-    font-weight: 500;
-    display: inline-block;
-}
-
-/* ⚠️ Alert custom */
-.alert-warning-custom {
-    background-color: rgba(103, 125, 106, 0.25);
-    border: 1px solid rgba(214, 189, 152, 0.3);
-    color: var(--krem);
-    border-radius: 10px;
-    padding: 20px;
-}
-
-.alert-warning-custom i {
-    color: var(--krem);
-    vertical-align: middle;
-}
-
-/* 📋 Input dan Form */
-.form-control {
-    background-color: #2d4540;
-    color: var(--putih-lembut);
-    border: 1px solid rgba(214, 189, 152, 0.2);
-    border-radius: 8px;
-}
-
-.form-control:focus {
-    background-color: #3a4c47;
-    color: #ffffff;
-    border-color: var(--krem);
-    box-shadow: 0 0 0 0.2rem rgba(214, 189, 152, 0.15);
-}
-
-.form-control::placeholder {
-    color: rgba(244, 243, 239, 0.5);
-}
-
-/* 📱 Responsive */
-@media (max-width: 768px) {
-    .table-custom {
-        font-size: 0.85rem;
-    }
-    
-    .table-custom thead th {
-        padding: 12px 8px;
-        font-size: 0.7rem;
-    }
-    
-    .table-custom tbody td {
-        padding: 12px 8px;
-    }
-    
-    .img-table {
-        width: 45px;
-        height: 45px;
-    }
-    
-    h1 {
-        font-size: 1.75rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .card-summary {
-        margin-bottom: 15px;
-    }
-}
-</style>
 
 @endsection

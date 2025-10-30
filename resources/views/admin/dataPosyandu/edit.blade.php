@@ -1,12 +1,15 @@
 @extends('admin.layout.master')
 @section('title', 'Edit Posyandu')
 
+  @include('admin.layout.css')
+
 @section('content')
 <div class="container animate-fadein">
     <h2 class="mb-4 text-beige">Edit Posyandu</h2>
 
     <div class="card p-4 shadow-lg">
-        <form id="editForm" action="{{ route('dataPosyandu.update', $posyandu->posyandu_id) }}" method="POST" enctype="multipart/form-data">
+      <form id="editForm" action="{{ route('dataPosyandu.update', $posyandu->id) }}" method="POST" enctype="multipart/form-data">
+
             @csrf
             @method('PUT')
 
@@ -49,6 +52,7 @@
                     <i class="bi bi-save"></i> Update
                 </button>
                 <a href="{{ route('dataPosyandu.index') }}" class="btn btn-secondary px-4">
+
                     <i class="bi bi-arrow-left"></i> Batal
                 </a>
             </div>
@@ -62,44 +66,12 @@
 <script>
     window.successMessage = "{{ session('success') }}";
 </script>
-<script src="{{ asset('assetsAdmin/js/dataPosyandu-edit.js') }}"></script>
+@include('admin.layout.js')
 
 {{-- CSS Tema --}}
-<link rel="stylesheet" href="{{ asset('assetsAdmin/css/dataPosyandu-edit.css') }}">
+@include('admin.layout.css')
 
 
-{{-- Style tambahan agar sejalan dengan tema --}}
-<style>
-    .text-beige { color: #d6c6a1; }
-    .card {
-        background-color: rgba(40, 60, 55, 0.8);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 15px;
-    }
-    .form-control {
-        background-color: #223a36;
-        color: #d6c6a1;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .form-control:focus {
-        background-color: #2c4a45;
-        color: #fff;
-        border-color: #b8b28c;
-        box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
-    }
-    .img-hover {
-        transition: 0.3s ease-in-out;
-    }
-    .img-hover:hover {
-        transform: scale(1.1);
-        box-shadow: 0 0 10px rgba(255,255,255,0.2);
-    }
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fadein {
-        animation: fadeIn 0.8s ease forwards;
-    }
-</style>
+
+
 @endsection

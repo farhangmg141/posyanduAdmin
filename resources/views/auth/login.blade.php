@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login & Register | Aplikasi</title>
+    <title>Login & Register </title>
 
     <!-- CSRF TOKEN -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -13,14 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* =============================
-     DARK THEME - HITAM MODERN
-     ============================= */
-        *
-
-        /* =============================
-   THEME - EARTHY DARK GREEN PALETTE
-   ============================= */
+       
         * {
             box-sizing: border-box;
         }
@@ -468,9 +461,7 @@
             });
         }
 
-        // ========================
-        // FORM HANDLER (FINAL FIX)
-        // ========================
+    
         async function handleForm(formId, routeUrl, alertId) {
             const form = document.getElementById(formId);
             const submitBtn = form.querySelector('button[type="submit"]');
@@ -500,7 +491,6 @@
 
                     const data = await response.json();
 
-                    // === Jika berhasil ===
                     if (response.ok && data.success) {
                         alertBox.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
                         form.reset();
@@ -508,17 +498,17 @@
                             window.location.href = data.redirect;
                         }, 1000);
                     }
-                    // === Jika gagal (validasi atau kredensial salah) ===
+                 
                     else {
                         let errorMessages = '';
 
-                        // Jika Laravel kirim daftar error validasi
+                     
                         if (data.errors) {
                             Object.values(data.errors).forEach((errorArray) => {
                                 errorMessages += `<div>${errorArray[0]}</div>`;
                             });
                         }
-                        // Jika hanya 1 pesan umum
+                    
                         else if (data.message) {
                             errorMessages = data.message;
                         } else {

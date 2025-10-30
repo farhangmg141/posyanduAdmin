@@ -8,13 +8,13 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('posyandu', function (Blueprint $table) {
-            $table->id('posyandu_id');
+            $table->id(); 
             $table->string('nama');
             $table->text('alamat');
             $table->string('rt', 5);
             $table->string('rw', 5);
             $table->string('kontak')->nullable();
-            $table->string('media')->nullable(); // Foto
+            $table->string('media')->nullable(); // Foto atau dokumen
             $table->timestamps();
         });
     }
