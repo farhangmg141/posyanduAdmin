@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('layout.admin.master')
 @section('title', 'Tambah Warga')
 @section('content')
 <div class="container mt-4">

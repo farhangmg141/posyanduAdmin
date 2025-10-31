@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $dataJadwal      = JadwalPosyandu::with('posyandu')->latest()->take(5)->get();
         $dataLayanan     = LayananPosyandu::with(['jadwal', 'warga'])->latest()->take(5)->get();
 
-        return view('admin.dashboard', compact(
+        return view('pages.dashboard.dashboard', compact(
             'totalPosyandu',
             'totalKader',
             'totalJadwal',

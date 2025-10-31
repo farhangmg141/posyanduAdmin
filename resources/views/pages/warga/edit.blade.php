@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('layout.admin.master')
 @section('title', 'Edit Warga')
 @section('content')
 <div class="container mt-4">
@@ -30,7 +30,7 @@
         </div>
         <div class="mb-3">
             <label>Tanggal Lahir</label>
-            
+
 <form action="{{ route('warga.update', $warga->id) }}" method="POST">
     @csrf
     @method('PUT')

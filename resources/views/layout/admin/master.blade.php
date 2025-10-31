@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('admin.layout.head')
+@include('layout.admin.head')
 
 <body>
-    @include('admin.layout.navbar')
-    @include('admin.layout.sidebar')
+    @include('layout.admin.navbar')
+    @include('layout.admin.sidebar')
 
     <!-- 🔹 Main Content -->
     <main class="content">
         @yield('content')
     </main>
 
-    @include('admin.layout.scripts')
+    @include('layout.admin.scripts')
 </body>
 
 </html>

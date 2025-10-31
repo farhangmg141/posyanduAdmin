@@ -12,14 +12,14 @@ class KaderPosyanduController extends Controller
     public function index()
     {
         $data = KaderPosyandu::with(['warga', 'posyandu'])->get();
-        return view('kader_posyandu.index', compact('data'));
+        return view('pages.kader_posyandu.index', compact('data'));
     }
 
     public function create()
     {
         $warga = Warga::all();
         $posyandu = Posyandu::all();
-        return view('kader_posyandu.create', compact('warga', 'posyandu'));
+        return view('pages.kader_posyandu.create', compact('warga', 'posyandu'));
     }
 
     public function store(Request $request)
@@ -40,7 +40,7 @@ class KaderPosyanduController extends Controller
     {
         $warga = Warga::all();
         $posyandu = Posyandu::all();
-        return view('kader_posyandu.edit', compact('kader_posyandu', 'warga', 'posyandu'));
+        return view('pages.kader_posyandu.edit', compact('kader_posyandu', 'warga', 'posyandu'));
     }
 
     public function update(Request $request, KaderPosyandu $kader_posyandu)
@@ -62,6 +62,6 @@ class KaderPosyanduController extends Controller
 
     public function show(KaderPosyandu $kader_posyandu)
     {
-        return view('kader_posyandu.show', compact('kader_posyandu'));
+        return view('pages.kader_posyandu.show', compact('kader_posyandu'));
     }
 }

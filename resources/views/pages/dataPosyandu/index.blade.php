@@ -1,8 +1,8 @@
-@extends('admin.layout.master')
+@extends('layout.admin.master')
 @section('title', 'Data Posyandu')
 
 @section('content')
-@include('admin.layout.css')
+@include('layout.admin.css')
 
 <div class="container animate-fadein">
     <h2 class="mb-4 text-beige fw-bold">Data Posyandu</h2>
@@ -58,7 +58,7 @@
 </a>
 
 
-<form action="{{ route('dataPosyandu.destroy', $item->id) }}" 
+<form action="{{ route('dataPosyandu.destroy', $item->id) }}"
       method="POST" class="d-inline form-hapus">
     @csrf
     @method('DELETE')
@@ -119,6 +119,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 {{-- CSS Tema --}}
-@include('admin.layout.css')
+@include('layout.admin.css')
 
 @endsection

@@ -8,6 +8,16 @@ use App\Http\Controllers\WargaController;
 use App\Http\Controllers\KaderPosyanduController;
 use App\Http\Controllers\JadwalPosyanduController;
 use App\Http\Controllers\LayananPosyanduController;
+use App\Http\Controllers\UserAdminController;
+
+Route::prefix('admin')->group(function () {
+    Route::get('/useradmin', [UserAdminController::class, 'index'])->name('useradmin.index');
+    Route::get('/useradmin/create', [UserAdminController::class, 'create'])->name('useradmin.create');
+    Route::post('/useradmin', [UserAdminController::class, 'store'])->name('useradmin.store');
+    Route::get('/useradmin/{useradmin}/edit', [UserAdminController::class, 'edit'])->name('useradmin.edit');
+    Route::put('/useradmin/{useradmin}', [UserAdminController::class, 'update'])->name('useradmin.update');
+    Route::delete('/useradmin/{useradmin}', [UserAdminController::class, 'destroy'])->name('useradmin.destroy');
+});
 
 
 

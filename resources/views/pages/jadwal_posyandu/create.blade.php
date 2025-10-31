@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('layout.admin.master')
 @section('title', 'Tambah Jadwal Posyandu')
 
 @section('content')
@@ -41,7 +41,7 @@
         {{-- Tombol Aksi --}}
         <div class="d-flex justify-content-between">
             <a href="{{ route('jadwal.index') }}" class="btn btn-secondary">Kembali</a>
-            <button type="submit" class="btn btn-success">💾 Simpan</button>
+            <button type="submit" class="btn btn-success">Simpan</button>
         </div>
     </form>
 </div>

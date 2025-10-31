@@ -11,13 +11,13 @@ class JadwalPosyanduController extends Controller
     public function index()
     {
         $jadwal = JadwalPosyandu::with('posyandu')->get();
-        return view('jadwal_posyandu.index', compact('jadwal'));
+        return view('pages.jadwal_posyandu.index', compact('jadwal'));
     }
 
     public function create()
     {
         $posyandu = \App\Models\Posyandu::all();
-        return view('jadwal_posyandu.create', compact('posyandu'));
+        return view('pages.jadwal_posyandu.create', compact('posyandu'));
     }
 
     public function store(Request $request)
@@ -39,7 +39,7 @@ class JadwalPosyanduController extends Controller
     {
         $jadwal = JadwalPosyandu::findOrFail($id);
         $posyandu = Posyandu::all();
-        return view('jadwal_posyandu.edit', compact('jadwal', 'posyandu'));
+        return view('pages.jadwal_posyandu.edit', compact('jadwal', 'posyandu'));
     }
     public function show($id)
     {

@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-       
+
         * {
             box-sizing: border-box;
         }
@@ -390,7 +390,7 @@
                 </div>
 
                 <h1>Selamat Datang</h1>
-                <span class="form-subtitle">Masuk ke akun Anda</span>
+                <span class="form-subtitle">Admin Posyandu</span>
                 <div id="loginAlert"></div>
 
                 <!-- Email -->
@@ -424,13 +424,13 @@
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
-                    <h1>Selamat Datang Kembali!</h1>
-                    <p>Masuk dengan akun Anda untuk melanjutkan perjalanan bersama kami</p>
+                    <h1>Selamat Datang Kembali</h1>
+                    <p>Masuk dengan akun Anda untuk melanjutkan Ke Dashboard Admin Posyandu</p>
                     <button class="ghost" id="signIn">Masuk</button>
                 </div>
                 <div class="overlay-panel overlay-right">
-                    <h1>Halo, Teman!</h1>
-                    <p>Daftarkan diri Anda dan mulai perjalanan luar biasa bersama kami</p>
+                    <h1>Halo, Kader Posyandu</h1>
+                    <p>daftar Dan Masuk ke Admin Posyandu</p>
                     <button class="ghost" id="signUp">Daftar</button>
                 </div>
             </div>
@@ -461,7 +461,7 @@
             });
         }
 
-    
+
         async function handleForm(formId, routeUrl, alertId) {
             const form = document.getElementById(formId);
             const submitBtn = form.querySelector('button[type="submit"]');
@@ -498,17 +498,17 @@
                             window.location.href = data.redirect;
                         }, 1000);
                     }
-                 
+
                     else {
                         let errorMessages = '';
 
-                     
+
                         if (data.errors) {
                             Object.values(data.errors).forEach((errorArray) => {
                                 errorMessages += `<div>${errorArray[0]}</div>`;
                             });
                         }
-                    
+
                         else if (data.message) {
                             errorMessages = data.message;
                         } else {

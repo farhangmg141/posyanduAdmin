@@ -1,18 +1,19 @@
-@extends('admin.layout.master')
-@section('title', 'Daftar Jadwal Posyandu')
+@extends('layout.admin.master')
+
+@section('title', 'Data Warga')
 
 @section('content')
+{{-- SweetAlert2 CDN --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+@include('layout.admin.css')
 
-@include('admin.layout.css')
 <div class="container mt-4">
-    <h2 class="mb-4">📅 Daftar Jadwal Posyandu</h2>
-
-    {{-- Tombol Tambah Data --}}
-    <a href="{{ route('jadwal.create') }}" class="btn btn-primary mb-3">+ Tambah Jadwal</a>
+    <h2 class="mb-4">Daftar Warga</h2>
+    <a href="{{ route('warga.create') }}" class="btn btn-primary mb-3">+ Tambah Warga</a>
 
     {{-- Notifikasi Sukses --}}
-    @if (session('success'))
+    @if(session('success'))
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 Swal.fire({
@@ -27,52 +28,50 @@
         </script>
     @endif
 
-    {{-- Tabel Data Jadwal --}}
     <table class="table table-bordered table-striped align-middle text-center">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Posyandu</th>
-                <th>Tanggal</th>
-                <th>Tema</th>
-                <th>Keterangan</th>
+                <th>Nama</th>
+                <th>NIK</th>
+                <th>Jenis Kelamin</th>
+                <th>No HP</th>
+                <th>Alamat</th>
+                <th>Tanggal Lahir</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($jadwal as $item)
+            @foreach($data as $item)
             <tr>
-                <td>{{ $item->jadwal_id }}</td>
-                <td>{{ $item->posyandu->nama ?? '-' }}</td>
-                <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
-                <td>{{ $item->tema }}</td>
-                <td>{{ $item->keterangan ?? '-' }}</td>
+                <td>{{ $item->id }}</td>
+                <td>{{ $item->nama }}</td>
+                <td>{{ $item->nik }}</td>
+                <td>{{ $item->jenis_kelamin }}</td>
+                <td>{{ $item->no_hp }}</td>
+                <td>{{ $item->alamat }}</td>
+                <td>{{ $item->tanggal_lahir }}</td>
                 <td>
-                    <a href="{{ route('jadwal.show', $item->jadwal_id) }}" class="btn btn-info btn-sm">Detail</a>
-                    <a href="{{ route('jadwal.edit', $item->jadwal_id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('jadwal.destroy', $item->jadwal_id) }}" method="POST" class="d-inline delete-form">
+                    <a href="{{ route('warga.show', $item->id) }}" class="btn btn-info btn-sm">Detail</a>
+                    <a href="{{ route('warga.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+
+                    {{-- Tombol Hapus pakai SweetAlert --}}
+                    <form action="{{ route('warga.destroy', $item->id) }}" method="POST" class="d-inline delete-form">
                         @csrf
                         @method('DELETE')
-                        <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="{{ $item->jadwal_id }}">
-                            Hapus
-                        </button>
+                        <button type="button" class="btn btn-danger btn-sm btn-delete">Hapus</button>
                     </form>
                 </td>
             </tr>
-            @empty
-            <tr>
-                <td colspan="6">Belum ada data jadwal</td>
-            </tr>
-            @endforelse
+            @endforeach
         </tbody>
     </table>
 </div>
 
-{{-- SweetAlert2 --}}
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{{-- SweetAlert Script --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Konfirmasi Hapus
+        // Konfirmasi hapus
         document.querySelectorAll('.btn-delete').forEach(button => {
             button.addEventListener('click', function() {
                 const form = this.closest('form');

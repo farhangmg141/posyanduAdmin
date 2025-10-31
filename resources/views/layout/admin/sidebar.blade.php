@@ -2,6 +2,7 @@
 <nav id="sidebarMenu" class="sidebar d-lg-block text-white collapse" data-simplebar>
     <div class="sidebar-inner px-4 pt-3">
         <ul class="nav flex-column pt-3 pt-md-0">
+
             <!-- Logo -->
             <li class="nav-item text-center mb-3">
                 <a href="#" class="nav-link d-flex flex-column align-items-center">
@@ -11,9 +12,9 @@
                 </a>
             </li>
 
-            <!-- Menu -->
+            <!-- Dashboard -->
             <li class="nav-item">
-                <a href="{{ url('/dashboard') }}" class="nav-link {{ request()->is('/dashboard') ? 'active' : '' }}">
+                <a href="{{ url('dashboard') }}" class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
                     <span class="sidebar-icon">
                         <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
@@ -24,8 +25,9 @@
                 </a>
             </li>
 
+            <!-- Data Posyandu -->
             <li class="nav-item">
-                <a href="{{ url('data/dataPosyandu') }}" class="nav-link {{ request()->is('data/dataPosyandu') ? 'active' : '' }}">
+                <a href="{{ url('data/dataPosyandu') }}" class="nav-link {{ request()->is('data/dataPosyandu*') ? 'active' : '' }}">
                     <span class="sidebar-icon">
                         <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M3 4h18v2H3V4zm0 6h18v2H3v-2zm0 6h18v2H3v-2z"></path>
@@ -35,34 +37,46 @@
                 </a>
             </li>
 
+            <!-- Kader Posyandu -->
             <li class="nav-item">
-                <a href="{{ url('/kader-posyandu') }}" class="nav-link {{ request()->is('/kader-posyandu') ? 'active' : '' }}">
+                <a href="{{ url('kader-posyandu') }}" class="nav-link {{ request()->is('kader-posyandu*') ? 'active' : '' }}">
                     <span class="sidebar-icon">
                         <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4zm0 2c-3.31 0-6 1.34-6 3v3h12v-3c0-1.66-2.69-3-6-3z">
-                            </path>
+                            <path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4zm0 2c-3.31 0-6 1.34-6 3v3h12v-3c0-1.66-2.69-3-6-3z"></path>
                         </svg>
                     </span>
                     <span class="sidebar-text">Kader Posyandu</span>
                 </a>
             </li>
 
+            <!-- Warga -->
             <li class="nav-item">
-                <a href="{{ url('/warga') }}" class="nav-link {{ request()->is('/warga') ? 'active' : '' }}">
+                <a href="{{ url('warga') }}" class="nav-link {{ request()->is('warga*') ? 'active' : '' }}">
                     <span class="sidebar-icon">
                         <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4zm0 2c-3.31 0-6 1.34-6 3v3h12v-3c0-1.66-2.69-3-6-3z">
-                            </path>
+                            <path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4zm0 2c-3.31 0-6 1.34-6 3v3h12v-3c0-1.66-2.69-3-6-3z"></path>
                         </svg>
                     </span>
                     <span class="sidebar-text">Warga</span>
                 </a>
             </li>
 
+            <!-- User Admin -->
             <li class="nav-item">
-                <a href="{{ url('jadwal-posyandu') }}" class="nav-link {{ request()->is('admin/jadwal') ? 'active' : '' }}">
+                <a href="{{ url('admin/useradmin') }}" class="nav-link {{ request()->is('admin/useradmin*') ? 'active' : '' }}">
+                    <span class="sidebar-icon">
+                        <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4zm0 2c-3.31 0-6 1.34-6 3v3h12v-3c0-1.66-2.69-3-6-3z"/>
+                            <path d="M16 11c1.66 0 3-1.34 3-3s-1.34-3-3-3c-.35 0-.69.06-1.01.17.63.84 1.01 1.88 1.01 3.01s-.38 2.17-1.01 3.01c.32.11.66.17 1.01.17zM8 11c.35 0 .69-.06 1.01-.17A3.99 3.99 0 018 8c0-1.13.38-2.17 1.01-3.01A3.002 3.002 0 005 8c0 1.66 1.34 3 3 3z"/>
+                        </svg>
+                    </span>
+                    <span class="sidebar-text">User Admin</span>
+                </a>
+            </li>
+
+            <!-- Jadwal Posyandu -->
+            <li class="nav-item">
+                <a href="{{ url('jadwal-posyandu') }}" class="nav-link {{ request()->is('jadwal-posyandu*') ? 'active' : '' }}">
                     <span class="sidebar-icon">
                         <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M8 7V3h8v4h5v2H3V7h5zm-2 4h12v9H6v-9z"></path>
@@ -72,8 +86,9 @@
                 </a>
             </li>
 
+            <!-- Layanan Posyandu -->
             <li class="nav-item">
-                <a href="{{ url('admin/layanan') }}" class="nav-link {{ request()->is('admin/layanan') ? 'active' : '' }}">
+                <a href="{{ url('admin/layanan') }}" class="nav-link {{ request()->is('admin/layanan*') ? 'active' : '' }}">
                     <span class="sidebar-icon">
                         <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M4 4h16v2H4V4zm0 4h16v2H4V8zm0 4h10v2H4v-2zm0 4h10v2H4v-2z"></path>
@@ -83,8 +98,9 @@
                 </a>
             </li>
 
+            <!-- Catatan Imunisasi -->
             <li class="nav-item">
-                <a href="{{ url('admin/imunisasi') }}" class="nav-link {{ request()->is('admin/imunisasi') ? 'active' : '' }}">
+                <a href="{{ url('admin/imunisasi') }}" class="nav-link {{ request()->is('admin/imunisasi*') ? 'active' : '' }}">
                     <span class="sidebar-icon">
                         <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M17 2H7C5.9 2 5 2.9 5 4v16l7-3 7 3V4c0-1.1-.9-2-2-2z"></path>
@@ -94,8 +110,9 @@
                 </a>
             </li>
 
+            <!-- Dokumentasi -->
             <li class="nav-item mt-4">
-                <a href="{{ url('admin/dokumentasi') }}" class="nav-link {{ request()->is('admin/dokumentasi') ? 'active' : '' }}">
+                <a href="{{ url('admin/dokumentasi') }}" class="nav-link {{ request()->is('admin/dokumentasi*') ? 'active' : '' }}">
                     <span class="sidebar-icon">
                         <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd"
@@ -107,7 +124,7 @@
                 </a>
             </li>
 
-            <!-- logout -->
+            <!-- Logout -->
             <li class="nav-item logout-slide mt-auto">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -125,6 +142,7 @@
                     </a>
                 </form>
             </li>
+
         </ul>
     </div>
 </nav>

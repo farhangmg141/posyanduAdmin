@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('layout.admin.master')
 @section('title', 'Edit Jadwal Posyandu')
 
 @section('content')

@@ -1,8 +1,8 @@
-@extends('admin.layout.master')
+@extends('layout.admin.master')
 
 @section('title', 'Dashboard Admin')
 
-@include('admin.layout.css')
+@include('layout.admin.css')
 
 @section('content')
 <div class="container-fluid mt-4 px-4">
@@ -149,7 +149,7 @@
                 <div class="bg-white bg-opacity-25 rounded-3 p-2 me-3">
                     <i class="bi bi-calendar-event fs-4 text-white"></i>
                 </div>
-                <h5 class="mb-0 text-white fw-bold" style="font-size: 1.1rem; letter-spacing: 0.5px;">📅 Jadwal Posyandu Terbaru</h5>
+                <h5 class="mb-0 text-white fw-bold" style="font-size: 1.1rem; letter-spacing: 0.5px;">Jadwal Posyandu Terbaru</h5>
             </div>
         </div>
         <div class="card-body p-0" style="background: #ffffff;">
@@ -205,7 +205,7 @@
                 <div class="bg-white bg-opacity-25 rounded-3 p-2 me-3">
                     <i class="bi bi-person-badge fs-4 text-white"></i>
                 </div>
-                <h5 class="mb-0 text-white fw-bold" style="font-size: 1.1rem; letter-spacing: 0.5px;">👩‍⚕️ Kader Posyandu Terbaru</h5>
+                <h5 class="mb-0 text-white fw-bold" style="font-size: 1.1rem; letter-spacing: 0.5px;">Kader Posyandu Terbaru</h5>
             </div>
         </div>
         <div class="card-body p-0" style="background: #ffffff;">
@@ -266,7 +266,7 @@
                 <div class="bg-white bg-opacity-25 rounded-3 p-2 me-3">
                     <i class="bi bi-clipboard2-pulse fs-4 text-white"></i>
                 </div>
-                <h5 class="mb-0 text-white fw-bold" style="font-size: 1.1rem; letter-spacing: 0.5px;">🧾 Layanan Posyandu Terbaru</h5>
+                <h5 class="mb-0 text-white fw-bold" style="font-size: 1.1rem; letter-spacing: 0.5px;">Layanan Posyandu Terbaru</h5>
             </div>
         </div>
         <div class="card-body p-0" style="background: #ffffff;">

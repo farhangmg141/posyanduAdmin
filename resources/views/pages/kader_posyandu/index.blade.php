@@ -1,11 +1,11 @@
-@extends('admin.layout.master')
+@extends('layout.admin.master')
 
 @section('title', 'Kader Posyandu')
 @section('content')
 <!-- Tambahkan SweetAlert2 dari CDN -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-@include('admin.layout.css')
+@include('layout.admin.css')
 
 <div class="container mt-4">
     <h2>Daftar Kader Posyandu</h2>

@@ -19,7 +19,7 @@ class AuthController extends Controller
      */
     public function showLoginRegister()
     {
-        return view('auth.login');
+        return view('pages.auth.login');
     }
 
     /**
@@ -48,7 +48,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            
+
             // Menggunakan route('admin.dashboard') lebih disarankan
             return response()->json([
                 'success' => true,
@@ -108,11 +108,11 @@ class AuthController extends Controller
 }
 
 
-    
-     
+
+
     public function showLinkRequestForm()
     {
-        return view('auth.passwords.email');
+        return view('pages.auth.passwords.email');
     }
 
     /**
@@ -156,7 +156,7 @@ class AuthController extends Controller
      */
     public function showResetForm(Request $request, $token)
     {
-        return view('auth.passwords.reset', ['token' => $token, 'email' => $request->email]);
+        return view('pages.auth.passwords.reset', ['token' => $token, 'email' => $request->email]);
     }
 
     /**
@@ -176,7 +176,7 @@ class AuthController extends Controller
         if (!$resetRecord || !$user || !Hash::check($request->token, $resetRecord->token)) {
             return back()->withErrors(['email' => 'Token reset password tidak valid atau email salah.']);
         }
-        
+
         // Cek apakah token sudah kadaluarsa (misal > 60 menit)
         if (Carbon::parse($resetRecord->created_at)->addMinutes(60)->isPast()) {
             DB::table('password_reset_tokens')->where('email', $request->email)->delete();

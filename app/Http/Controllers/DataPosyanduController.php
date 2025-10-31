@@ -11,12 +11,12 @@ class DataPosyanduController extends Controller
     public function index()
     {
         $data = Posyandu::latest()->get();
-        return view('admin.dataPosyandu.index', compact('data'));
+        return view('pages.dataPosyandu.index', compact('data'));
     }
 
     public function create()
     {
-        return view('admin.dataPosyandu.create');
+        return view('pages.dataPosyandu.create');
     }
 
     public function store(Request $request)
@@ -43,7 +43,7 @@ class DataPosyanduController extends Controller
 public function edit($id)
 {
     $posyandu = Posyandu::findOrFail($id);
-    return view('admin.dataPosyandu.edit', compact('posyandu'));
+    return view('pages.dataPosyandu.edit', compact('posyandu'));
 }
 
 

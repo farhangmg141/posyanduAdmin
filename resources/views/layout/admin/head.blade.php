@@ -1,5 +1,5 @@
 <head>
-    @include('admin.layout.css')
+    @include('layout.admin.css')
 
     <title>@yield('title', 'Dashboard Admin')</title>
 
@@ -8,6 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    @include('admin.layout.css')
+    @include('layout.admin.css')
     @stack('styles')
 </head>

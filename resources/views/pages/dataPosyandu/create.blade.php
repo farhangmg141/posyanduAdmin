@@ -1,7 +1,7 @@
-@extends('admin.layout.master')
+@extends('layout.admin.master')
 @section('title', 'Tambah Posyandu')
 
-@include('admin.layout.css')    
+@include('layout.admin.css')
 
 @section('content')
 <div class="container">

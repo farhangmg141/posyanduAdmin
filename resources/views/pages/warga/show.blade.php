@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('layout.admin.master')
 @section('title', 'Detail Warga')
 
 @section('content')
@@ -59,7 +59,7 @@
         <li class="list-group-item"><strong>NIK:</strong> {{ $warga->nik }}</li>
         <li class="list-group-item"><strong>No HP:</strong> {{ $warga->no_hp ?? '-' }}</li>
         <li class="list-group-item"><strong>Alamat:</strong> {{ $warga->alamat ?? '-' }}</li>
-        <li class="list-group-item"><strong>Jenis Kelamin:</strong> 
+        <li class="list-group-item"><strong>Jenis Kelamin:</strong>
             {{ $warga->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}
         </li>
         <li class="list-group-item"><strong>Tanggal Lahir:</strong> {{ $warga->tanggal_lahir ?? '-' }}</li>
