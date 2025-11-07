@@ -1,7 +1,7 @@
-@extends('admin.layout.master')
+@extends('layout.admin.master')
 @section('title', 'Edit Posyandu')
 
-  @include('admin.layout.css')
+  @include('layout.admin.css')
 
 @section('content')
 <div class="container animate-fadein">
@@ -66,10 +66,10 @@
 <script>
     window.successMessage = "{{ session('success') }}";
 </script>
-@include('admin.layout.js')
+@include('layout.admin.js')
 
 {{-- CSS Tema --}}
-@include('admin.layout.css')
+@include('layout.admin.css')
 
 
 

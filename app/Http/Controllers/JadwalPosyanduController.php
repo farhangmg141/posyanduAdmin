@@ -47,7 +47,7 @@ class JadwalPosyanduController extends Controller
         $jadwal = \App\Models\JadwalPosyandu::with('posyandu')->findOrFail($id);
 
 
-        return view('jadwal_posyandu.show', compact('jadwal'));
+        return view('pages.jadwal_posyandu.show', compact('jadwal'));
     }
 
     public function update(Request $request, $id)
