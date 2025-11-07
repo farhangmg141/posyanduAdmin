@@ -146,3 +146,43 @@
         </ul>
     </div>
 </nav>
+
+<!-- 🔹 Floating WhatsApp Button -->
+<a href="https://wa.me/082284572524?text=Halo%20Posyandu,%20saya%20ingin%20bertanya%20tentang%20layanan."
+   class="float-wa"
+   target="_blank"
+   title="Chat WhatsApp">
+   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="wa-icon">
+</a>
+
+<!-- 🔹 CSS Floating Button -->
+<style>
+.float-wa {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.float-wa:hover {
+    background-color: #20b358;
+    transform: scale(1.1);
+}
+
+.wa-icon {
+    width: 35px;
+    height: 35px;
+}
+</style>
