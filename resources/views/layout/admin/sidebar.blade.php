@@ -78,9 +78,9 @@
             <li class="nav-item">
                 <a href="{{ url('jadwal-posyandu') }}" class="nav-link {{ request()->is('jadwal-posyandu*') ? 'active' : '' }}">
                     <span class="sidebar-icon">
-                        <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 24 24">
+                        <svg class="icon icon-xs me-2 fill="currentColor" viewBox="0 0 24 24">
                             <path d="M8 7V3h8v4h5v2H3V7h5zm-2 4h12v9H6v-9z"></path>
-                        </svg>
+                        </svg> 
                     </span>
                     <span class="sidebar-text">Jadwal Posyandu</span>
                 </a>
