@@ -78,7 +78,7 @@
             <li class="nav-item">
                 <a href="{{ url('jadwal-posyandu') }}" class="nav-link {{ request()->is('jadwal-posyandu*') ? 'active' : '' }}">
                     <span class="sidebar-icon">
-                        <svg class="icon icon-xs me-2 fill="currentColor" viewBox="0 0 24 24">
+                        <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M8 7V3h8v4h5v2H3V7h5zm-2 4h12v9H6v-9z"></path>
                         </svg> 
                     </span>
@@ -121,6 +121,18 @@
                         </svg>
                     </span>
                     <span class="sidebar-text">Dokumentasi</span>
+                </a>
+            </li>
+
+            <!-- Profil Admin -->
+            <li class="nav-item mt-3">
+                <a href="{{ route('profilAdmin.index') }}" class="nav-link {{ request()->is('admin/profil*') ? 'active' : '' }}">
+                    <span class="sidebar-icon">
+                        <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+                        </svg>
+                    </span>
+                    <span class="sidebar-text">Profil Admin</span>
                 </a>
             </li>
 
