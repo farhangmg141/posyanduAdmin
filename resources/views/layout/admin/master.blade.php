@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 @include('layout.admin.head')
 
 <body>
