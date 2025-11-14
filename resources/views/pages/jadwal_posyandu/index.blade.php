@@ -3,9 +3,10 @@
 
 @section('content')
 
-
 @include('layout.admin.css')
-<div class="container mt-4">
+
+{{-- Container Full --}}
+<div class="container-fluid mt-4"> 
     <h2 class="mb-4">Daftar Jadwal Posyandu</h2>
 
     {{-- Tombol Tambah Data --}}
@@ -96,4 +97,5 @@
         });
     });
 </script>
+
 @endsection

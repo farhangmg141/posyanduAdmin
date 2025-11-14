@@ -8,7 +8,8 @@
 
 @include('layout.admin.css')
 
-<div class="container mt-4">
+{{-- Container Full --}}
+<div class="container-fluid mt-4">
     <h2 class="mb-4">Daftar Warga</h2>
     <a href="{{ route('warga.create') }}" class="btn btn-primary mb-3">+ Tambah Warga</a>
 
@@ -28,7 +29,10 @@
         </script>
     @endif
 
+    <div class="table-responsive">
     <table class="table table-bordered table-striped align-middle text-center">
+</div>
+
         <thead>
             <tr>
                 <th>ID</th>
@@ -95,4 +99,5 @@
         });
     });
 </script>
+
 @endsection
