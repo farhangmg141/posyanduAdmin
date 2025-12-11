@@ -10,12 +10,20 @@ use App\Http\Controllers\JadwalPosyanduController;
 use App\Http\Controllers\LayananPosyanduController;
 use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\ProfilAdminController;
+use App\Http\Controllers\CatatanImunisasiController;
+use App\Http\Controllers\DokumentasiController;
 
+
+/*
+|--------------------------------------------------------------------------
+| GUEST (LOGIN & REGISTER)
+|--------------------------------------------------------------------------
+*/
 Route::middleware('guest')->group(function () {
     Route::get('/', [AuthController::class, 'showLoginRegister'])->name('login.show');
-    Route::get('/login', [AuthController::class, 'showLoginRegister'])->name('login'); // ✅ Tambahan ini
     Route::post('/login', [AuthController::class, 'login'])->name('login.process');
     Route::post('/register', [AuthController::class, 'register'])->name('register.process');
+
     Route::get('forgot-password', [AuthController::class, 'showLinkRequestForm'])->name('password.request');
     Route::post('forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
     Route::get('reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
@@ -23,18 +31,59 @@ Route::middleware('guest')->group(function () {
 });
 
 
+/*
+|--------------------------------------------------------------------------
+| AUTH PROTECTED ROUTES
+|--------------------------------------------------------------------------
+*/
 Route::middleware('auth')->group(function () {
+
+    /*
+    |-------------------------
+    | LOGOUT
+    |-------------------------
+    */
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    // Dashboard Admin
+
+    /*
+    |-------------------------
+    | DASHBOARD
+    |-------------------------
+    */
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-    // PROFIL ADMIN
+
+    /*
+    |-------------------------
+    | PROFIL ADMIN
+    |-------------------------
+    */
     Route::get('/admin/profil', [ProfilAdminController::class, 'index'])->name('profilAdmin.index');
     Route::get('/admin/profil/edit', [ProfilAdminController::class, 'edit'])->name('profilAdmin.edit');
     Route::post('/admin/profil/update', [ProfilAdminController::class, 'update'])->name('profilAdmin.update');
 
-    // USER ADMIN ROUTES
+
+    /*
+    |-------------------------
+    | DOKUMENTASI (RESOURCE)
+    |-------------------------
+    */
+  Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('dokumentasi', DokumentasiController::class);
+});
+
+
+
+    /*
+    |-------------------------
+    | LAYANAN POSYANDU (RESOURCE)
+    |-------------------------
+    */
+    Route::resource('layanan', LayananPosyanduController::class);
+
+
+
     Route::prefix('admin')->group(function () {
         Route::get('/useradmin', [UserAdminController::class, 'index'])->name('useradmin.index');
         Route::get('/useradmin/create', [UserAdminController::class, 'create'])->name('useradmin.create');
@@ -44,25 +93,46 @@ Route::middleware('auth')->group(function () {
         Route::delete('/useradmin/{useradmin}', [UserAdminController::class, 'destroy'])->name('useradmin.destroy');
     });
 
-    // DATA POSYANDU
-    Route::get('/data/dataPosyandu', [DataPosyanduController::class, 'index'])->name('dataPosyandu.index');
-    Route::get('/data/dataPosyandu/create', [DataPosyanduController::class, 'create'])->name('dataPosyandu.create');
-    Route::post('/data/dataPosyandu', [DataPosyanduController::class, 'store'])->name('dataPosyandu.store');
-    Route::get('/data/dataPosyandu/{posyandu}/edit', [DataPosyanduController::class, 'edit'])->name('dataPosyandu.edit');
-    Route::put('/data/dataPosyandu/{posyandu}', [DataPosyanduController::class, 'update'])->name('dataPosyandu.update');
-    Route::delete('/data/dataPosyandu/{posyandu}', [DataPosyanduController::class, 'destroy'])->name('dataPosyandu.destroy');
 
-    // WARGA ROUTES
-    Route::get('/warga', [WargaController::class, 'index'])->name('warga.index');
-    Route::get('/warga/create', [WargaController::class, 'create'])->name('warga.create');
-    Route::post('/warga', [WargaController::class, 'store'])->name('warga.store');
-    Route::get('/warga/{id}', [WargaController::class, 'show'])->name('warga.show');
-    Route::get('/warga/{id}/edit', [WargaController::class, 'edit'])->name('warga.edit');
-    Route::put('/warga/{id}', [WargaController::class, 'update'])->name('warga.update');
-    Route::delete('/warga/{id}', [WargaController::class, 'destroy'])->name('warga.destroy');
+    /*
+    |-------------------------
+    | DATA POSYANDU
+    |-------------------------
+    */
+    Route::prefix('data')->group(function () {
+        Route::get('/dataPosyandu', [DataPosyanduController::class, 'index'])->name('dataPosyandu.index');
+        Route::get('/dataPosyandu/create', [DataPosyanduController::class, 'create'])->name('dataPosyandu.create');
+        Route::post('/dataPosyandu', [DataPosyanduController::class, 'store'])->name('dataPosyandu.store');
+        Route::get('/dataPosyandu/{posyandu}/edit', [DataPosyanduController::class, 'edit'])->name('dataPosyandu.edit');
+        Route::put('/dataPosyandu/{posyandu}', [DataPosyanduController::class, 'update'])->name('dataPosyandu.update');
+        Route::delete('/dataPosyandu/{posyandu}', [DataPosyanduController::class, 'destroy'])->name('dataPosyandu.destroy');
+    });
 
-    // KADER POSYANDU ROUTES
-    Route::resource('kader-posyandu', KaderPosyanduController::class);
+
+    /*
+    |-------------------------
+    | WARGA
+    |-------------------------
+    */
+    Route::prefix('warga')->group(function () {
+        Route::get('/', [WargaController::class, 'index'])->name('warga.index');
+        Route::get('/create', [WargaController::class, 'create'])->name('warga.create');
+        Route::post('/', [WargaController::class, 'store'])->name('warga.store');
+        Route::get('/{id}', [WargaController::class, 'show'])->name('warga.show');
+        Route::get('/{id}/edit', [WargaController::class, 'edit'])->name('warga.edit');
+        Route::put('/{id}', [WargaController::class, 'update'])->name('warga.update');
+        Route::delete('/{id}', [WargaController::class, 'destroy'])->name('warga.destroy');
+
+        Route::get('/export/excel', [WargaController::class, 'exportExcel'])->name('warga.export.excel');
+        Route::get('/export/pdf', [WargaController::class, 'exportPdf'])->name('warga.export.pdf');
+    });
+
+
+    /*
+    |-------------------------
+    | KADER POSYANDU (MANUAL, resource DIHAPUS)
+    |-------------------------
+    */
     Route::get('/kader-posyandu', [KaderPosyanduController::class, 'index'])->name('kader.index');
     Route::get('/kader-posyandu/create', [KaderPosyanduController::class, 'create'])->name('kader.create');
     Route::post('/kader-posyandu', [KaderPosyanduController::class, 'store'])->name('kader.store');
@@ -71,7 +141,15 @@ Route::middleware('auth')->group(function () {
     Route::put('/kader-posyandu/{id}', [KaderPosyanduController::class, 'update'])->name('kader.update');
     Route::delete('/kader-posyandu/{id}', [KaderPosyanduController::class, 'destroy'])->name('kader.destroy');
 
-    // JADWAL POSYANDU ROUTES
+    Route::get('/kader/export/excel', [KaderPosyanduController::class, 'exportExcel'])->name('kader.export.excel');
+    Route::get('/kader/export/pdf', [KaderPosyanduController::class, 'exportPdf'])->name('kader.export.pdf');
+
+
+    /*
+    |-------------------------
+    | JADWAL POSYANDU
+    |-------------------------
+    */
     Route::get('/jadwal-posyandu', [JadwalPosyanduController::class, 'index'])->name('jadwal.index');
     Route::get('/jadwal-posyandu/create', [JadwalPosyanduController::class, 'create'])->name('jadwal.create');
     Route::post('/jadwal-posyandu', [JadwalPosyanduController::class, 'store'])->name('jadwal.store');
@@ -80,12 +158,19 @@ Route::middleware('auth')->group(function () {
     Route::put('/jadwal-posyandu/{id}', [JadwalPosyanduController::class, 'update'])->name('jadwal.update');
     Route::delete('/jadwal-posyandu/{id}', [JadwalPosyanduController::class, 'destroy'])->name('jadwal.destroy');
 
-    // LAYANAN POSYANDU ROUTES
-    Route::get('/layanan-posyandu', [LayananPosyanduController::class, 'index'])->name('layanan.index');
-    Route::get('/layanan-posyandu/create', [LayananPosyanduController::class, 'create'])->name('layanan.create');
-    Route::post('/layanan-posyandu', [LayananPosyanduController::class, 'store'])->name('layanan.store');
-    Route::get('/layanan-posyandu/{id}', [LayananPosyanduController::class, 'show'])->name('layanan.show');
-    Route::get('/layanan-posyandu/{id}/edit', [LayananPosyanduController::class, 'edit'])->name('layanan.edit');
-    Route::put('/layanan-posyandu/{id}', [LayananPosyanduController::class, 'update'])->name('layanan.update');
-    Route::delete('/layanan-posyandu/{id}', [LayananPosyanduController::class, 'destroy'])->name('layanan.destroy');
+
+    /*
+    |-------------------------
+    | CATATAN IMUNISASI
+    |-------------------------
+    */
+    Route::prefix('admin/imunisasi')->group(function () {
+        Route::get('/', [CatatanImunisasiController::class, 'index'])->name('imunisasi.index');
+        Route::get('/create', [CatatanImunisasiController::class, 'create'])->name('imunisasi.create');
+        Route::post('/store', [CatatanImunisasiController::class, 'store'])->name('imunisasi.store');
+        Route::get('/edit/{id}', [CatatanImunisasiController::class, 'edit'])->name('imunisasi.edit');
+        Route::put('/update/{id}', [CatatanImunisasiController::class, 'update'])->name('imunisasi.update');
+        Route::delete('/delete/{id}', [CatatanImunisasiController::class, 'destroy'])->name('imunisasi.delete');
+    });
+
 });

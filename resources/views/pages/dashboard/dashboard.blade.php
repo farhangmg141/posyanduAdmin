@@ -349,6 +349,8 @@
             distribusiCanvas.setAttribute('data-layanan', '{{ $totalLayanan ?? 0 }}');
         }
     });
+    @include('layout.admin.footer')
+
 </script>
 
 {{-- Load Chart Script --}}

@@ -1,103 +1,160 @@
 @extends('layout.admin.master')
-
 @section('title', 'Data Warga')
 
 @section('content')
-{{-- SweetAlert2 CDN --}}
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<div class="container mt-4">
 
-@include('layout.admin.css')
+    <h3 class="mb-3 fw-bold" style="color: #ffffff;">Data Warga</h3>
 
-{{-- Container Full --}}
-<div class="container-fluid mt-4">
-    <h2 class="mb-4">Daftar Warga</h2>
-    <a href="{{ route('warga.create') }}" class="btn btn-primary mb-3">+ Tambah Warga</a>
-
-    {{-- Notifikasi Sukses --}}
+    {{-- ALERT SUCCESS --}}
     @if(session('success'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil!',
-                    text: @json(session('success')),
-                    confirmButtonColor: '#677D6A',
-                    background: '#40534C',
-                    color: '#D6BD98'
-                });
-            });
-        </script>
+        <div class="alert alert-success">
+            {sesion('success')}
+        </div>
     @endif
 
-    <div class="table-responsive">
-    <table class="table table-bordered table-striped align-middle text-center">
+    {{-- FORM FILTER & SEARCH --}}
+    <div class="card border-0 shadow mb-4" style="background-color:#213830; border-radius: 12px;">
+        <div class="card-body">
+
+            <form method="GET" class="row g-3">
+
+                {{-- Search --}}
+                <div class="col-md-4">
+                    <input type="text" name="search" class="form-control"
+                        style="background:#40534C; color:white; border-color:#677D6A;"
+                        placeholder="Cari nama / NIK / alamat..."
+                        value="{{ request('search') }}">
+                </div>
+
+                {{-- Filter Jenis Kelamin --}}
+                <div class="col-md-3">
+                    <select name="jenis_kelamin" class="form-control"
+                            style="background:#40534C; color:white; border-color:#677D6A;">
+                        <option value="">-- Filter Jenis Kelamin --</option>
+                        <option value="L" {{ request('jenis_kelamin')=='L' ? 'selected' : '' }}>Laki-laki</option>
+                        <option value="P" {{ request('jenis_kelamin')=='P' ? 'selected' : '' }}>Perempuan</option>
+                    </select>
+                </div>
+
+                {{-- Tombol --}}
+                <div class="col-md-2">
+                    <button class="btn w-100 fw-bold"
+                        style="background-color:#D6BD98; color:#213830;">
+                        Filter
+                    </button>
+                </div>
+
+                {{-- Reset --}}
+                <div class="col-md-2">
+                    <a href="{{ route('warga.index') }}"
+                        class="btn w-100 fw-bold"
+                        style="background-color:#677D6A; color:white;">
+                        Reset
+                    </a>
+                </div>
+
+                {{-- Tambah Data --}}
+                <div class="col-md-1 text-end">
+                    <a href="{{ route('warga.create') }}" 
+                        class="btn fw-bold"
+                        style="background-color:#4CAF50; color:white;">
+                       + Tambah 
+                    </a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    {{-- TABEL --}}
+    <div class="card border-0 shadow" style="background-color:#213830; border-radius: 12px;">
+        <div class="card-body p-0">
+
+            <div class="table-responsive">
+                <table class="table table-dark table-hover align-middle mb-0" style="color:white;">
+                    <thead style="background-color:#40534C;">
+                        <tr>
+                            <th>
+                                <a href="{{ route('warga.index', array_merge(request()->all(), ['sort' => 'nama', 'direction' => $sortField=='nama' && $sortDirection=='asc' ? 'desc' : 'asc'])) }}"
+                                   style="color:white; text-decoration:none;">
+                                    Nama
+                                </a>
+                            </th>
+                            <th>
+                                <a href="{{ route('warga.index', array_merge(request()->all(), ['sort' => 'nik', 'direction' => $sortField=='nik' && $sortDirection=='asc' ? 'desc' : 'asc'])) }}"
+                                   style="color:white; text-decoration:none;">
+                                    NIK
+                                </a>
+                            </th>
+                            <th>No HP</th>
+                            <th>Alamat</th>
+                            <th>
+                                <a href="{{ route('warga.index', array_merge(request()->all(), ['sort' => 'jenis_kelamin', 'direction' => $sortField=='jenis_kelamin' && $sortDirection=='asc' ? 'desc' : 'asc'])) }}"
+                                   style="color:white; text-decoration:none;">
+                                    Jenis Kelamin
+                                </a>
+                            </th>
+                            <th>
+                                <a href="{{ route('warga.index', array_merge(request()->all(), ['sort' => 'tanggal_lahir', 'direction' => $sortField=='tanggal_lahir' && $sortDirection=='asc' ? 'desc' : 'asc'])) }}"
+                                   style="color:white; text-decoration:none;">
+                                    Tgl Lahir 
+                                </a>
+                            </th>
+                            <th class="text-center" style="width: 160px;">Aksi</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @forelse($data as $item)
+                            <tr>
+                                <td>{{ $item->nama }}</td>
+                                <td>{{ $item->nik }}</td>
+                                <td>{{ $item->no_hp ?? '-' }}</td>
+                                <td>{{ $item->alamat ?? '-' }}</td>
+                                <td>{{ $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
+                                <td>{{ $item->tanggal_lahir ?? '-' }}</td>
+
+                                <td class="text-center">
+                                    <a href="{{ route('warga.show', $item->id) }}"
+                                        class="btn btn-info btn-sm">Detail</a>
+
+                                    <a href="{{ route('warga.edit', $item->id) }}"
+                                        class="btn btn-warning btn-sm">Edit</a>
+
+                                    <form action="{{ route('warga.destroy', $item->id) }}"
+                                          method="POST"
+                                          class="d-inline-block"
+                                          onsubmit="return confirm('Yakin hapus data ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm">
+                                            Hapus
+                                        </button>       
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="7" class="text-center text-white py-3">
+                                    Tidak Ada data di temukan 
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    {{-- PAGINATION --}}
+    <div class="d-flex justify-content-center mt-3">
+        {{ $data->appends(request()->all())->links() }}
+    </div>
+
 </div>
-
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nama</th>
-                <th>NIK</th>
-                <th>Jenis Kelamin</th>
-                <th>No HP</th>
-                <th>Alamat</th>
-                <th>Tanggal Lahir</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($data as $item)
-            <tr>
-                <td>{{ $item->id }}</td>
-                <td>{{ $item->nama }}</td>
-                <td>{{ $item->nik }}</td>
-                <td>{{ $item->jenis_kelamin }}</td>
-                <td>{{ $item->no_hp }}</td>
-                <td>{{ $item->alamat }}</td>
-                <td>{{ $item->tanggal_lahir }}</td>
-                <td>
-                    <a href="{{ route('warga.show', $item->id) }}" class="btn btn-info btn-sm">Detail</a>
-                    <a href="{{ route('warga.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-
-                    {{-- Tombol Hapus pakai SweetAlert --}}
-                    <form action="{{ route('warga.destroy', $item->id) }}" method="POST" class="d-inline delete-form">
-                        @csrf
-                        @method('DELETE')
-                        <button type="button" class="btn btn-danger btn-sm btn-delete">Hapus</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
-
-{{-- SweetAlert Script --}}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Konfirmasi hapus
-        document.querySelectorAll('.btn-delete').forEach(button => {
-            button.addEventListener('click', function() {
-                const form = this.closest('form');
-                Swal.fire({
-                    title: 'Yakin hapus data ini?',
-                    text: 'Data yang dihapus tidak bisa dikembalikan!',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Ya, hapus!',
-                    cancelButtonText: 'Batal',
-                    confirmButtonColor: '#B85042',
-                    cancelButtonColor: '#677D6A',
-                    background: '#40534C',
-                    color: '#D6BD98'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        form.submit();
-                    }
-                });
-            });
-        });
-    });
-</script>
+@include('layout.admin.footer')
 
 @endsection

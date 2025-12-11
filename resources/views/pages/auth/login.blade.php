@@ -18,16 +18,29 @@
         }
 
         body {
-            background: linear-gradient(135deg, #183A3A, #3B4D48);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 10px;
-            color: #D9C3A6;
-        }
+    background: url('https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg') 
+                no-repeat center center/cover;
+    background-attachment: fixed;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 10px;
+    color: #D9C3A6;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55); /* Overlay gelap */
+    backdrop-filter: blur(3px);      /* Blur lembut */
+    z-index: -1;
+}
+
 
         h1 {
             font-weight: bold;

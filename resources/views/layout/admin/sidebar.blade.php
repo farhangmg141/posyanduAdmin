@@ -108,16 +108,15 @@
                 </li>
 
                 <!-- Layanan -->
-                <li class="nav-item">
-                    <a href="{{ url('admin/layanan') }}" class="nav-link {{ request()->is('admin/layanan*') ? 'active' : '' }}">
-                        <span class="sidebar-icon">
-                            <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M4 4h16v2H4V4zm0 4h16v2H4V8zm0 4h10v2H4v-2zm0 4h10v2H4v-2z"></path>
-                            </svg>
-                        </span>
-                        <span class="sidebar-text">Layanan Posyandu</span>
-                    </a>
-                </li>
+<a href="{{ route('layanan.index') }}"
+    class="nav-link {{ request()->routeIs('layanan.*') ? 'active' : '' }}">
+    <span class="sidebar-icon">
+        <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M4 4h16v2H4V4zm0 4h16v2H4V8zm0 4h10v2H4v-2zm0 4h10v2H4v-2z"></path>
+        </svg>
+    </span>
+    <span class="sidebar-text">Layanan Posyandu</span>
+</a>
 
                 <!-- Imunisasi -->
                 <li class="nav-item">
