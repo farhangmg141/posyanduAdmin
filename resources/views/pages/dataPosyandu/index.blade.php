@@ -136,6 +136,46 @@
 </div>
 
 @include('layout.admin.footer')
+<script>
+$(document).ready(function () {
+
+    $('#posyanduTable').DataTable({
+        pageLength: 10,
+        lengthMenu: [5,10,25,50],
+        ordering: true,
+        responsive: true,
+        language: {
+            search: "Cari:",
+            lengthMenu: "Tampilkan _MENU_ data",
+            info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+            paginate: {
+                previous: "‹",
+                next: "›"
+            },
+            zeroRecords: "Data tidak ditemukan"
+        }
+    });
+
+    // SweetAlert hapus
+    $('.form-hapus').on('submit', function(e){
+        e.preventDefault();
+        let form = this;
+
+        Swal.fire({
+            title: 'Yakin ingin menghapus?',
+            text: 'Data akan dihapus permanen!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Ya, hapus'
+        }).then((result) => {
+            if (result.isConfirmed) form.submit();
+        });
+    });
+
+});
+</script>
 
 {{-- SweetAlert2 --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -214,7 +254,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .img-hover {
             width: 55px !important;
             height: 55px !important;
-        }
+        }   
     }
 </style>
 

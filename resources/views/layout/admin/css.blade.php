@@ -7,4 +7,4 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assetsAdmin/img/favicon/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assetsAdmin/img/favicon/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('assetsAdmin/img/favicon/site.webmanifest') }}">
-    <meta name="theme-color" content="#0E2F32">
+    <meta name="theme-color" content="#ffffff">

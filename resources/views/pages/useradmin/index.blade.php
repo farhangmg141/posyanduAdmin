@@ -6,7 +6,7 @@
 <div class="container-fluid mt-4">
     <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
-        <h1 class="fw-bold text-primary mb-0">
+        <h1 class="fw-bold text-primary mb-0"style="color: #fff;">
             <i class="bi bi-people-fill me-2"></i> Kelola User
         </h1>
         <a href="{{ route('useradmin.create') }}" class="btn btn-success shadow-sm">

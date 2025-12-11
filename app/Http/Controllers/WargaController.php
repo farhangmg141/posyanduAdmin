@@ -15,11 +15,8 @@ class WargaController extends Controller
     {
         $query = Warga::query();
         
-<<<<<<< HEAD
-      
-=======
-        // Search
->>>>>>> 8b8dcb9cb57b2425b848e3402d3634d98fcbe069
+
+  
         if ($request->has('search') && !empty($request->search)) {
             $search = $request->search;
             $query->where(function($q) use ($search) {
@@ -28,21 +25,11 @@ class WargaController extends Controller
                   ->orWhere('alamat', 'like', '%' . $search . '%');
             });
         }
-        
-<<<<<<< HEAD
-        
-=======
-        // Filter Jenis Kelamin
->>>>>>> 8b8dcb9cb57b2425b848e3402d3634d98fcbe069
+    
         if ($request->has('jenis_kelamin') && !empty($request->jenis_kelamin)) {
             $query->where('jenis_kelamin', $request->jenis_kelamin);
         }
         
-<<<<<<< HEAD
-        
-=======
-        // Sort
->>>>>>> 8b8dcb9cb57b2425b848e3402d3634d98fcbe069
         $sortField = $request->get('sort', 'id');
         $sortDirection = $request->get('direction', 'desc');
         
