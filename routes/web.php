@@ -128,11 +128,14 @@ Route::middleware('auth')->group(function () {
     });
 
 
+<<<<<<< HEAD
     Route::get('/identitas-pengembang', function () {
     return view('identitas');
 })->name('identitas.pengembang');
 
 
+=======
+>>>>>>> 8b8dcb9cb57b2425b848e3402d3634d98fcbe069
     /*
     |-------------------------
     | KADER POSYANDU (MANUAL, resource DIHAPUS)

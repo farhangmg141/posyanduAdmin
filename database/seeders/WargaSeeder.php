@@ -27,3 +27,5 @@ class WargaSeeder extends Seeder
 
     }
 }
+
+

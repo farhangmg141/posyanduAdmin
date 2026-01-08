@@ -16,24 +16,24 @@ class KaderPosyanduController extends Controller
     {
         $query = KaderPosyandu::with(['warga', 'posyandu']);
         
-      
         if ($request->has('search') && !empty($request->search)) {
             $search = $request->search;
             $query->whereHas('warga', function($q) use ($search) {
                 $q->where('nama', 'like', '%' . $search . '%');
             });
         }
-        
-       
+        // Filter berdasarkan posyandu
+
         if ($request->has('posyandu') && !empty($request->posyandu)) {
             $query->where('posyandu_id', $request->posyandu);
         }
-        
-       
+               
         if ($request->has('peran') && !empty($request->peran)) {
             $query->where('peran', $request->peran);
         }
    
+        
+        // Filter berdasarkan status
         if ($request->has('status') && !empty($request->status)) {
             if ($request->status == 'aktif') {
                 $query->where(function($q) {

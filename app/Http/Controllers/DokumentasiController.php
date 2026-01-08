@@ -44,8 +44,8 @@ class DokumentasiController extends Controller
                 ]);
             }
         }
-
         return redirect()->route('admin.dokumentasi.index')
+
             ->with('success', 'Dokumentasi berhasil ditambahkan!');
     }
 
