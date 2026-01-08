@@ -1,7 +1,7 @@
 <head>
     @include('layout.admin.css')
 
-    <title>@yield('title', 'Dashboard Admin')</title>
+    <title>@yield('')</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

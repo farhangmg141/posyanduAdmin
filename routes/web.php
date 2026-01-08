@@ -51,7 +51,9 @@ Route::middleware('auth')->group(function () {
     | DASHBOARD
     |-------------------------
     */
+     Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+     });
 
 
     /*
@@ -139,10 +141,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/kader-posyandu', [KaderPosyanduController::class, 'index'])->name('kader.index');
     Route::get('/kader-posyandu/create', [KaderPosyanduController::class, 'create'])->name('kader.create');
     Route::post('/kader-posyandu', [KaderPosyanduController::class, 'store'])->name('kader.store');
-    Route::get('/kader-posyandu/{id}', [KaderPosyanduController::class, 'show'])->name('kader.show');
-    Route::get('/kader-posyandu/{id}/edit', [KaderPosyanduController::class, 'edit'])->name('kader.edit');
-    Route::put('/kader-posyandu/{id}', [KaderPosyanduController::class, 'update'])->name('kader.update');
-    Route::delete('/kader-posyandu/{id}', [KaderPosyanduController::class, 'destroy'])->name('kader.destroy');
+   Route::get('/kader-posyandu/{kader_posyandu}', [KaderPosyanduController::class, 'show'])->name('kader.show');
+Route::get('/kader-posyandu/{kader_posyandu}/edit', [KaderPosyanduController::class, 'edit'])->name('kader.edit');
+Route::put('/kader-posyandu/{kader_posyandu}', [KaderPosyanduController::class, 'update'])->name('kader.update');
+Route::delete('/kader-posyandu/{kader_posyandu}', [KaderPosyanduController::class, 'destroy'])->name('kader.destroy');
+
 
     Route::get('/kader/export/excel', [KaderPosyanduController::class, 'exportExcel'])->name('kader.export.excel');
     Route::get('/kader/export/pdf', [KaderPosyanduController::class, 'exportPdf'])->name('kader.export.pdf');

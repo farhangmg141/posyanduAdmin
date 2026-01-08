@@ -68,7 +68,14 @@ class KaderPosyanduController extends Controller
             'akhir_tugas' => 'nullable|date|after:mulai_tugas',
         ]);
 
-        KaderPosyandu::create($request->all());
+       KaderPosyandu::create([
+    'posyandu_id' => $request->posyandu_id,
+    'warga_id'    => $request->warga_id,
+    'peran'       => $request->peran,
+    'mulai_tugas' => $request->mulai_tugas,
+    'akhir_tugas' => $request->akhir_tugas,
+]);
+
         return redirect()->route('kader.index')->with('success', 'Data kader berhasil ditambahkan');
     }
 
@@ -112,14 +119,12 @@ class KaderPosyanduController extends Controller
         return Excel::download(new KaderPosyanduExport($request), $filename);
     }
 
-    /**
-     * Export PDF
-     */
+   
     public function exportPdf(Request $request)
     {
         $query = KaderPosyandu::with(['warga', 'posyandu']);
         
-        // Apply filters sama seperti index
+       
         if ($request->has('search') && !empty($request->search)) {
             $search = $request->search;
             $query->whereHas('warga', function($q) use ($search) {

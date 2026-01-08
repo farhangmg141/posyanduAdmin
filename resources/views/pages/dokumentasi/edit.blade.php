@@ -6,11 +6,7 @@
     <div class="card shadow p-4">
         <h4 class="fw-bold mb-3">✏ Edit Dokumentasi</h4>
 
-<<<<<<< HEAD
         <form action="{{ route('admin.dokumentasi.update', $dokumentasi->id) }}" method="POST" enctype="multipart/form-data">
-=======
-        <form action="{{ route('dokumentasi.update', $dokumentasi->id) }}" method="POST" enctype="multipart/form-data">
->>>>>>> 8b8dcb9cb57b2425b848e3402d3634d98fcbe069
             @csrf @method('PUT')
 
             <div class="mb-3">
@@ -62,11 +58,7 @@
             </div>
 
             <button class="btn btn-success">Update</button>
-<<<<<<< HEAD
             <a href="{{ route('admin.dokumentasi.index') }}" class="btn btn-secondary">Kembali</a>
-=======
-            <a href="{{ route('dokumentasi.index') }}" class="btn btn-secondary">Kembali</a>
->>>>>>> 8b8dcb9cb57b2425b848e3402d3634d98fcbe069
 
         </form>
     </div>
