@@ -27,6 +27,44 @@
             });
         </script>
     @endif
+{{-- Filter & Search --}}
+<form method="GET" action="{{ route('jadwal.index') }}" class="mb-4">
+
+    <div class="row g-2">
+
+        {{-- Search --}}
+        <div class="col-md-4">
+            <input type="text" name="search" class="form-control"
+                placeholder="Cari tema atau keterangan..."
+                value="{{ request('search') }}">
+        </div>
+
+        {{-- Filter Posyandu --}}
+        <div class="col-md-3">
+            <select name="posyandu_id" class="form-control">
+                <option value="">-- Filter Posyandu --</option>
+                @foreach ($posyanduList as $p)
+                    <option value="{{ $p->posyandu_id }}"
+                        {{ request('posyandu_id') == $p->posyandu_id ? 'selected' : '' }}>
+                        {{ $p->nama }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        {{-- Filter Tanggal --}}
+        <div class="col-md-3">
+            <input type="date" name="tanggal" class="form-control"
+                value="{{ request('tanggal') }}">
+        </div>
+
+        {{-- Tombol --}}
+        <div class="col-md-2">
+            <button class="btn btn-primary w-100">Filter</button>
+        </div>
+    </div>
+
+</form>
 
     {{-- Tabel Data Jadwal --}}
     <table class="table table-bordered table-striped align-middle text-center">
@@ -68,6 +106,11 @@
         </tbody>
     </table>
 </div>
+{{-- Pagination --}}
+<div class="d-flex justify-content-center mt-3">
+    {{ $jadwal->links('pagination::bootstrap-5') }}
+</div>
+@include('layout.admin.footer')
 
 {{-- SweetAlert2 --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

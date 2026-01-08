@@ -9,17 +9,44 @@ use App\Models\Warga;
 
 class LayananPosyanduController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $layanan = LayananPosyandu::with(['jadwal', 'warga'])->get();
-        return view('layanan_posyandu.index', compact('layanan'));
+        $query = LayananPosyandu::with(['jadwal', 'warga']);
+
+        // SEARCH
+        if ($request->search) {
+            $query->whereHas('warga', function ($q) use ($request) {
+                $q->where('nama', 'like', '%' . $request->search . '%');
+            })
+            ->orWhere('vitamin', 'like', '%' . $request->search . '%')
+            ->orWhere('konseling', 'like', '%' . $request->search . '%');
+        }
+
+        // FILTER JADWAL
+        if ($request->jadwal_id) {
+            $query->where('jadwal_id', $request->jadwal_id);
+        }
+
+        // FILTER WARGA
+        if ($request->warga_id) {
+            $query->where('warga_id', $request->warga_id);
+        }
+
+        // PAGINATION
+        $layanan = $query->paginate(10);
+        $layanan->appends($request->all());
+
+        $jadwal = JadwalPosyandu::all();
+        $warga = Warga::all();
+
+        return view('pages.layanan.index', compact('layanan', 'jadwal', 'warga'));
     }
 
     public function create()
     {
         $jadwal = JadwalPosyandu::all();
         $warga = Warga::all();
-        return view('layanan_posyandu.create', compact('jadwal', 'warga'));
+        return view('pages.layanan.create', compact('jadwal', 'warga'));
     }
 
     public function store(Request $request)
@@ -27,50 +54,38 @@ class LayananPosyanduController extends Controller
         $request->validate([
             'jadwal_id' => 'required',
             'warga_id' => 'required',
-            'berat' => 'required|numeric',
-            'tinggi' => 'required|numeric',
-            'vitamin' => 'nullable|string',
-            'konseling' => 'nullable|string',
         ]);
 
         LayananPosyandu::create($request->all());
-        return redirect()->route('layanan.index')->with('success', 'Layanan Posyandu berhasil ditambahkan.');
+
+        return redirect()->route('layanan.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     public function show($id)
     {
-        $layanan = LayananPosyandu::with(['jadwal', 'warga'])->findOrFail($id);
-        return view('layanan_posyandu.show', compact('layanan'));
+        $item = LayananPosyandu::with(['jadwal', 'warga'])->findOrFail($id);
+        return view('pages.layanan.show', compact('item'));
     }
 
     public function edit($id)
     {
-        $layanan = LayananPosyandu::findOrFail($id);
+        $item = LayananPosyandu::findOrFail($id);
         $jadwal = JadwalPosyandu::all();
         $warga = Warga::all();
-        return view('layanan_posyandu.edit', compact('layanan', 'jadwal', 'warga'));
+        return view('pages.layanan.edit', compact('item', 'jadwal', 'warga'));
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'jadwal_id' => 'required',
-            'warga_id' => 'required',
-            'berat' => 'required|numeric',
-            'tinggi' => 'required|numeric',
-            'vitamin' => 'nullable|string',
-            'konseling' => 'nullable|string',
-        ]);
+        $item = LayananPosyandu::findOrFail($id);
+        $item->update($request->all());
 
-        $layanan = LayananPosyandu::findOrFail($id);
-        $layanan->update($request->all());
-
-        return redirect()->route('layanan.index')->with('success', 'Data Layanan Posyandu berhasil diperbarui.');
+        return redirect()->route('layanan.index')->with('success', 'Data berhasil diperbarui');
     }
 
     public function destroy($id)
     {
         LayananPosyandu::destroy($id);
-        return redirect()->route('layanan.index')->with('success', 'Data Layanan Posyandu berhasil dihapus.');
+        return redirect()->route('layanan.index')->with('success', 'Data berhasil dihapus');
     }
 }

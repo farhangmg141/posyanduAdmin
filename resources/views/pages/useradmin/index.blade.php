@@ -1,7 +1,7 @@
 @extends('layout.admin.master')
 
 @section('title', 'Kelola User')
-
+@include('layout.admin.css')
 @section('content')
 <div class="container-fluid mt-4">
     <!-- Header -->
@@ -82,17 +82,10 @@
         </div>
     @endif
 </div>
+@include('layout.admin.footer')
 
 <!-- Custom Style -->
 @push('styles')
-<style>
-    .table-hover tbody tr:hover {
-        background-color: #f8f9fa;
-        transition: 0.2s;
-    }
-    .badge {
-        font-size: 0.85rem;
-    }
-</style>
+
 @endpush
 @endsection

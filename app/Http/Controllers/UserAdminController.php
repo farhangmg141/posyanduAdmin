@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\UserAdmin;
+use App\Models\User;
 
 class UserAdminController extends Controller
 {
     public function index()
     {
-        $users = UserAdmin::latest()->paginate(10);
+        $users = User::latest()->paginate(10);
         return view('pages.useradmin.index', compact('users'));
     }
 
@@ -22,47 +22,52 @@ class UserAdminController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:100',
-            'email' => 'required|email|unique:user_admins',
+            'email' => 'required|email|unique:users,email',
             'role' => 'required|string',
             'password' => 'required|min:6',
         ]);
 
-        UserAdmin::create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
             'password' => bcrypt($request->password),
         ]);
 
-        return redirect()->route('useradmin.index')->with('success', 'User berhasil ditambahkan!');
+        return redirect()->route('useradmin.index')
+                         ->with('success', 'User berhasil ditambahkan!');
     }
 
-    public function edit(UserAdmin $useradmin)
+    public function edit(User $useradmin)
     {
         return view('pages.useradmin.edit', compact('useradmin'));
     }
 
-    public function update(Request $request, UserAdmin $useradmin)
+    public function update(Request $request, User $useradmin)
     {
         $request->validate([
             'name' => 'required|string|max:100',
-            'email' => 'required|email|unique:user_admins,email,' . $useradmin->id,
+            'email' => 'required|email|unique:users,email,' . $useradmin->id,
             'role' => 'required|string',
         ]);
 
         $data = $request->only('name', 'email', 'role');
+
         if ($request->filled('password')) {
             $data['password'] = bcrypt($request->password);
         }
 
         $useradmin->update($data);
 
-        return redirect()->route('useradmin.index')->with('success', 'User berhasil diperbarui!');
+        return redirect()->route('useradmin.index')
+                         ->with('success', 'User berhasil diperbarui!');
     }
 
-    public function destroy(UserAdmin $useradmin)
+    public function destroy(User $useradmin)
     {
         $useradmin->delete();
-        return redirect()->route('useradmin.index')->with('success', 'User berhasil dihapus!');
+
+        return redirect()->route('useradmin.index')
+                         ->with('success', 'User berhasil dihapus!');
     }
 }
